@@ -46,6 +46,9 @@ extension PushController {
 extension PushController {
     func pushReviewAdditionController() {
         let controller = ReviewAdditionController()
+        
+        GeneralFactory.addTitle("关闭", and: "发布", in: controller)
+        
         present(controller, animated: true)
     }
 }

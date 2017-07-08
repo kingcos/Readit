@@ -21,6 +21,15 @@ class ReviewAdditionController: UIViewController {
 extension ReviewAdditionController {
     func setupUI() {
         view.backgroundColor = UIColor.white
+    }
+}
+
+extension ReviewAdditionController {
+    override func close() {
+        dismiss(animated: true)
+    }
+    
+    override func sure() {
         
     }
 }

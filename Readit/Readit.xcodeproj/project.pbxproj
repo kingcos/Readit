@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5DC425336B16F3F056E50562 /* Pods_Readit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA43621039501E0FDBD42AF8 /* Pods_Readit.framework */; };
 		846AF8BE1F10DBAD00800464 /* ReviewAdditionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8BD1F10DBAD00800464 /* ReviewAdditionController.swift */; };
+		846AF8C31F10E48700800464 /* GeneralFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8C21F10E48700800464 /* GeneralFactory.swift */; };
+		846AF8C61F10E9DA00800464 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8C51F10E9DA00800464 /* UIViewController+Extension.swift */; };
 		8476E3451F10C8000098700C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476E3441F10C8000098700C /* Constant.swift */; };
 		8476E35B1F10C9880098700C /* CircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476E35A1F10C9880098700C /* CircleController.swift */; };
 		8476E35D1F10C9960098700C /* MoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476E35C1F10C9960098700C /* MoreController.swift */; };
@@ -23,6 +25,8 @@
 /* Begin PBXFileReference section */
 		4F32C1FF20B608DFF325FAE0 /* Pods-Readit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Readit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Readit/Pods-Readit.release.xcconfig"; sourceTree = "<group>"; };
 		846AF8BD1F10DBAD00800464 /* ReviewAdditionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewAdditionController.swift; sourceTree = "<group>"; };
+		846AF8C21F10E48700800464 /* GeneralFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralFactory.swift; sourceTree = "<group>"; };
+		846AF8C51F10E9DA00800464 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		8476E3441F10C8000098700C /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		8476E35A1F10C9880098700C /* CircleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleController.swift; sourceTree = "<group>"; };
 		8476E35C1F10C9960098700C /* MoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreController.swift; sourceTree = "<group>"; };
@@ -70,8 +74,17 @@
 		846AF8BF1F10E3F700800464 /* Factory */ = {
 			isa = PBXGroup;
 			children = (
+				846AF8C21F10E48700800464 /* GeneralFactory.swift */,
 			);
 			path = Factory;
+			sourceTree = "<group>";
+		};
+		846AF8C41F10E9C400800464 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				846AF8C51F10E9DA00800464 /* UIViewController+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		8476E3411F10C6340098700C /* SupportingFiles */ = {
@@ -87,6 +100,7 @@
 		8476E3421F10C7F10098700C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				846AF8C41F10E9C400800464 /* Extension */,
 				846AF8BF1F10E3F700800464 /* Factory */,
 				8476E3431F10C7F20098700C /* Constant */,
 			);
@@ -422,9 +436,11 @@
 				8485C8C11F10C61100553143 /* AppDelegate.swift in Sources */,
 				8476E35F1F10C99F0098700C /* PushController.swift in Sources */,
 				846AF8BE1F10DBAD00800464 /* ReviewAdditionController.swift in Sources */,
+				846AF8C31F10E48700800464 /* GeneralFactory.swift in Sources */,
 				8476E3631F10C9B90098700C /* SearchController.swift in Sources */,
 				8476E35D1F10C9960098700C /* MoreController.swift in Sources */,
 				8476E3451F10C8000098700C /* Constant.swift in Sources */,
+				846AF8C61F10E9DA00800464 /* UIViewController+Extension.swift in Sources */,
 				8476E3611F10C9AC0098700C /* RankController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
