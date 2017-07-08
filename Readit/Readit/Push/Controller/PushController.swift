@@ -13,23 +13,39 @@ class PushController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setupUI()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+}
+
+extension PushController {
+    func setupUI() {
+        view.backgroundColor = UIColor.white
+        
+        setupNavigationBar()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func setupNavigationBar() {
+        let navigationView = UIView(frame: CGRect(x: 0.0, y: -20.0, width: SCREEN_WIDTH, height: 65))
+        navigationView.backgroundColor = .white
+        
+        navigationController?.navigationBar.addSubview(navigationView)
+        
+        let addBookButton = UIButton(frame: CGRect(x: 20.0, y: 20.0, width: SCREEN_WIDTH, height: 45.0))
+        addBookButton.setImage(#imageLiteral(resourceName: "plus circle"), for: .normal)
+        addBookButton.setTitleColor(.black, for: .normal)
+        addBookButton.setTitle("新建书评", for: .normal)
+        addBookButton.contentHorizontalAlignment = .left
+        addBookButton.addTarget(self, action: #selector(PushController.pushReviewAdditionController),
+                                for: .touchUpInside)
+        
+        navigationView.addSubview(addBookButton)
     }
-    */
+}
 
+extension PushController {
+    func pushReviewAdditionController() {
+        let controller = ReviewAdditionController()
+        present(controller, animated: true)
+    }
 }
