@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		5DC425336B16F3F056E50562 /* Pods_Readit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA43621039501E0FDBD42AF8 /* Pods_Readit.framework */; };
 		8476E3451F10C8000098700C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476E3441F10C8000098700C /* Constant.swift */; };
+		8476E35B1F10C9880098700C /* CircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476E35A1F10C9880098700C /* CircleController.swift */; };
+		8476E35D1F10C9960098700C /* MoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476E35C1F10C9960098700C /* MoreController.swift */; };
+		8476E35F1F10C99F0098700C /* PushController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476E35E1F10C99F0098700C /* PushController.swift */; };
+		8476E3611F10C9AC0098700C /* RankController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476E3601F10C9AC0098700C /* RankController.swift */; };
+		8476E3631F10C9B90098700C /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476E3621F10C9B90098700C /* SearchController.swift */; };
 		8485C8C11F10C61100553143 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485C8C01F10C61100553143 /* AppDelegate.swift */; };
 		8485C8C81F10C61100553143 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8485C8C71F10C61100553143 /* Assets.xcassets */; };
 		8485C8CB1F10C61100553143 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8485C8C91F10C61100553143 /* LaunchScreen.storyboard */; };
@@ -17,6 +22,11 @@
 /* Begin PBXFileReference section */
 		4F32C1FF20B608DFF325FAE0 /* Pods-Readit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Readit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Readit/Pods-Readit.release.xcconfig"; sourceTree = "<group>"; };
 		8476E3441F10C8000098700C /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		8476E35A1F10C9880098700C /* CircleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleController.swift; sourceTree = "<group>"; };
+		8476E35C1F10C9960098700C /* MoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreController.swift; sourceTree = "<group>"; };
+		8476E35E1F10C99F0098700C /* PushController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushController.swift; sourceTree = "<group>"; };
+		8476E3601F10C9AC0098700C /* RankController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankController.swift; sourceTree = "<group>"; };
+		8476E3621F10C9B90098700C /* SearchController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		8485C8BD1F10C61100553143 /* Readit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Readit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8485C8C01F10C61100553143 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8485C8C71F10C61100553143 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,6 +91,166 @@
 			path = Constant;
 			sourceTree = "<group>";
 		};
+		8476E3461F10C95D0098700C /* Circle */ = {
+			isa = PBXGroup;
+			children = (
+				8476E3471F10C95D0098700C /* Controller */,
+				8476E3481F10C95D0098700C /* Model */,
+				8476E3491F10C95D0098700C /* View */,
+			);
+			path = Circle;
+			sourceTree = "<group>";
+		};
+		8476E3471F10C95D0098700C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8476E35A1F10C9880098700C /* CircleController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8476E3481F10C95D0098700C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8476E3491F10C95D0098700C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8476E34A1F10C95D0098700C /* More */ = {
+			isa = PBXGroup;
+			children = (
+				8476E34B1F10C95D0098700C /* Controller */,
+				8476E34C1F10C95D0098700C /* Model */,
+				8476E34D1F10C95D0098700C /* View */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
+		8476E34B1F10C95D0098700C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8476E35C1F10C9960098700C /* MoreController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8476E34C1F10C95D0098700C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8476E34D1F10C95D0098700C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8476E34E1F10C95D0098700C /* Push */ = {
+			isa = PBXGroup;
+			children = (
+				8476E34F1F10C95D0098700C /* Controller */,
+				8476E3501F10C95D0098700C /* Model */,
+				8476E3511F10C95D0098700C /* View */,
+			);
+			path = Push;
+			sourceTree = "<group>";
+		};
+		8476E34F1F10C95D0098700C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8476E35E1F10C99F0098700C /* PushController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8476E3501F10C95D0098700C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8476E3511F10C95D0098700C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8476E3521F10C95D0098700C /* Rank */ = {
+			isa = PBXGroup;
+			children = (
+				8476E3531F10C95D0098700C /* Controller */,
+				8476E3541F10C95D0098700C /* Model */,
+				8476E3551F10C95D0098700C /* View */,
+			);
+			path = Rank;
+			sourceTree = "<group>";
+		};
+		8476E3531F10C95D0098700C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8476E3601F10C9AC0098700C /* RankController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8476E3541F10C95D0098700C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8476E3551F10C95D0098700C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8476E3561F10C95D0098700C /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				8476E3571F10C95D0098700C /* Controller */,
+				8476E3581F10C95D0098700C /* Model */,
+				8476E3591F10C95D0098700C /* View */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		8476E3571F10C95D0098700C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8476E3621F10C9B90098700C /* SearchController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8476E3581F10C95D0098700C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8476E3591F10C95D0098700C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		8485C8B41F10C61100553143 = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +273,11 @@
 			isa = PBXGroup;
 			children = (
 				8485C8C01F10C61100553143 /* AppDelegate.swift */,
+				8476E3521F10C95D0098700C /* Rank */,
+				8476E3561F10C95D0098700C /* Search */,
+				8476E34E1F10C95D0098700C /* Push */,
+				8476E34A1F10C95D0098700C /* More */,
+				8476E3461F10C95D0098700C /* Circle */,
 				8476E3421F10C7F10098700C /* Utils */,
 				8476E3411F10C6340098700C /* SupportingFiles */,
 			);
@@ -232,8 +407,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8476E35B1F10C9880098700C /* CircleController.swift in Sources */,
 				8485C8C11F10C61100553143 /* AppDelegate.swift in Sources */,
+				8476E35F1F10C99F0098700C /* PushController.swift in Sources */,
+				8476E3631F10C9B90098700C /* SearchController.swift in Sources */,
+				8476E35D1F10C9960098700C /* MoreController.swift in Sources */,
 				8476E3451F10C8000098700C /* Constant.swift in Sources */,
+				8476E3611F10C9AC0098700C /* RankController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
