@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5DC425336B16F3F056E50562 /* Pods_Readit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA43621039501E0FDBD42AF8 /* Pods_Readit.framework */; };
 		8485C8C11F10C61100553143 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485C8C01F10C61100553143 /* AppDelegate.swift */; };
 		8485C8C31F10C61100553143 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485C8C21F10C61100553143 /* ViewController.swift */; };
 		8485C8C61F10C61100553143 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8485C8C41F10C61100553143 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F32C1FF20B608DFF325FAE0 /* Pods-Readit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Readit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Readit/Pods-Readit.release.xcconfig"; sourceTree = "<group>"; };
 		8485C8BD1F10C61100553143 /* Readit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Readit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8485C8C01F10C61100553143 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8485C8C21F10C61100553143 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +24,8 @@
 		8485C8C71F10C61100553143 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8485C8CA1F10C61100553143 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8485C8CC1F10C61100553143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A03959E024740032481BF91 /* Pods-Readit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Readit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Readit/Pods-Readit.debug.xcconfig"; sourceTree = "<group>"; };
+		AA43621039501E0FDBD42AF8 /* Pods_Readit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Readit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,12 +33,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DC425336B16F3F056E50562 /* Pods_Readit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B16848CEDAF172CC7191276 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA43621039501E0FDBD42AF8 /* Pods_Readit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		47B81EA032BB8D339F4565BD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8A03959E024740032481BF91 /* Pods-Readit.debug.xcconfig */,
+				4F32C1FF20B608DFF325FAE0 /* Pods-Readit.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8476E3411F10C6340098700C /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -50,6 +72,8 @@
 			children = (
 				8485C8BF1F10C61100553143 /* Readit */,
 				8485C8BE1F10C61100553143 /* Products */,
+				47B81EA032BB8D339F4565BD /* Pods */,
+				2B16848CEDAF172CC7191276 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,9 +103,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8485C8CF1F10C61100553143 /* Build configuration list for PBXNativeTarget "Readit" */;
 			buildPhases = (
+				461EAC5EF1B64393917E1452 /* [CP] Check Pods Manifest.lock */,
 				8485C8B91F10C61100553143 /* Sources */,
 				8485C8BA1F10C61100553143 /* Frameworks */,
 				8485C8BB1F10C61100553143 /* Resources */,
+				A9FE15D5664A68360FC80B2B /* [CP] Embed Pods Frameworks */,
+				B3F8A32AB93709E61309C4E9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -139,6 +166,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		461EAC5EF1B64393917E1452 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A9FE15D5664A68360FC80B2B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Readit/Pods-Readit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3F8A32AB93709E61309C4E9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Readit/Pods-Readit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8485C8B91F10C61100553143 /* Sources */ = {
@@ -267,6 +342,7 @@
 		};
 		8485C8D01F10C61100553143 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A03959E024740032481BF91 /* Pods-Readit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LEG7CXMPKJ;
@@ -280,6 +356,7 @@
 		};
 		8485C8D11F10C61100553143 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F32C1FF20B608DFF325FAE0 /* Pods-Readit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = LEG7CXMPKJ;
