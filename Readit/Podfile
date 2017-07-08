@@ -7,4 +7,5 @@ target 'Readit' do
 
   # Pods for Readit
   pod 'LeanCloud'
+  pod 'JVFloatLabeledTextField'
 end
