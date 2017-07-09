@@ -27,6 +27,10 @@
 		846AF8E91F10F51E00800464 /* page2.png in Resources */ = {isa = PBXBuildFile; fileRef = 846AF8DC1F10F51E00800464 /* page2.png */; };
 		846AF8F11F11230200800464 /* PhotoPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8F01F11230200800464 /* PhotoPickerController.swift */; };
 		846AF8F81F11503000800464 /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8F61F11503000800464 /* VPImageCropperViewController.m */; };
+		846AF8FA1F11CCDB00800464 /* PushTitleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8F91F11CCDB00800464 /* PushTitleController.swift */; };
+		846AF8FC1F11CCEC00800464 /* PushLevelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8FB1F11CCEC00800464 /* PushLevelController.swift */; };
+		846AF8FE1F11CD0100800464 /* PushCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8FD1F11CD0100800464 /* PushCategoryController.swift */; };
+		846AF9001F11CD1100800464 /* PushContentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8FF1F11CD1100800464 /* PushContentController.swift */; };
 		8476E3451F10C8000098700C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476E3441F10C8000098700C /* Constant.swift */; };
 		8476E35B1F10C9880098700C /* CircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476E35A1F10C9880098700C /* CircleController.swift */; };
 		8476E35D1F10C9960098700C /* MoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476E35C1F10C9960098700C /* MoreController.swift */; };
@@ -61,6 +65,10 @@
 		846AF8F21F11500D00800464 /* Readit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Readit-Bridging-Header.h"; sourceTree = "<group>"; };
 		846AF8F61F11503000800464 /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		846AF8F71F11503000800464 /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		846AF8F91F11CCDB00800464 /* PushTitleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushTitleController.swift; sourceTree = "<group>"; };
+		846AF8FB1F11CCEC00800464 /* PushLevelController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushLevelController.swift; sourceTree = "<group>"; };
+		846AF8FD1F11CD0100800464 /* PushCategoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushCategoryController.swift; sourceTree = "<group>"; };
+		846AF8FF1F11CD1100800464 /* PushContentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushContentController.swift; sourceTree = "<group>"; };
 		8476E3441F10C8000098700C /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		8476E35A1F10C9880098700C /* CircleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleController.swift; sourceTree = "<group>"; };
 		8476E35C1F10C9960098700C /* MoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreController.swift; sourceTree = "<group>"; };
@@ -257,9 +265,13 @@
 		8476E34F1F10C95D0098700C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				846AF8BD1F10DBAD00800464 /* ReviewAdditionController.swift */,
 				8476E35E1F10C99F0098700C /* PushController.swift */,
+				846AF8BD1F10DBAD00800464 /* ReviewAdditionController.swift */,
 				846AF8F01F11230200800464 /* PhotoPickerController.swift */,
+				846AF8F91F11CCDB00800464 /* PushTitleController.swift */,
+				846AF8FB1F11CCEC00800464 /* PushLevelController.swift */,
+				846AF8FD1F11CD0100800464 /* PushCategoryController.swift */,
+				846AF8FF1F11CD1100800464 /* PushContentController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -514,6 +526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846AF9001F11CD1100800464 /* PushContentController.swift in Sources */,
 				8476E35B1F10C9880098700C /* CircleController.swift in Sources */,
 				8485C8C11F10C61100553143 /* AppDelegate.swift in Sources */,
 				8476E35F1F10C99F0098700C /* PushController.swift in Sources */,
@@ -523,9 +536,12 @@
 				846AF8F11F11230200800464 /* PhotoPickerController.swift in Sources */,
 				8476E35D1F10C9960098700C /* MoreController.swift in Sources */,
 				8476E3451F10C8000098700C /* Constant.swift in Sources */,
+				846AF8FE1F11CD0100800464 /* PushCategoryController.swift in Sources */,
 				846AF8F81F11503000800464 /* VPImageCropperViewController.m in Sources */,
 				846AF8CA1F10F31000800464 /* ReviewAdditionHeaderView.swift in Sources */,
 				846AF8C61F10E9DA00800464 /* UIViewController+Extension.swift in Sources */,
+				846AF8FC1F11CCEC00800464 /* PushLevelController.swift in Sources */,
+				846AF8FA1F11CCDB00800464 /* PushTitleController.swift in Sources */,
 				8476E3611F10C9AC0098700C /* RankController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

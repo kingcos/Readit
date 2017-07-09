@@ -12,10 +12,10 @@ extension UIViewController {
     
     // MARK: - General factory add titles click events
     func close() {
-        
+        dismiss(animated: true)
     }
     
     func sure() {
-        
+        dismiss(animated: true)
     }
 }
