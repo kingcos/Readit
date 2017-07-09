@@ -8,10 +8,23 @@
 
 import UIKit
 
+protocol PhotoPickerControllerDelegate {
+    func getFromPicker(_ image: UIImage)
+}
+
+extension PhotoPickerControllerDelegate {
+    func getFromPicker(_ image: UIImage) {
+        fatalError("getImageFromPicker(:) has not been implemented")
+    }
+}
+
 class PhotoPickerController: UIViewController {
 
     var alert: UIAlertController?
+    
     var imagePicker: UIImagePickerController?
+    
+    var delegate: PhotoPickerControllerDelegate?
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -26,7 +39,12 @@ class PhotoPickerController: UIViewController {
                 self.takePhoto()
             }))
             
-            alert?.addAction(UIAlertAction(title: "取消", style: .cancel))
+            alert?.addAction(UIAlertAction(title: "取消", style: .cancel, handler: { action in
+                self.dismiss(animated: false)
+            }))
+            
+            guard let alert = alert else { return }
+            present(alert, animated: true)
         }
     }
     
@@ -54,15 +72,44 @@ extension PhotoPickerController {
 extension PhotoPickerController {
     
     func takePhoto() {
-        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePicker?.sourceType = .camera
+            
+            guard let imagePicker = imagePicker else { return }
+            present(imagePicker, animated: true)
+        } else {
+            let alertController = UIAlertController(title: "无法获取相机", message: nil, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "关闭", style: .cancel, handler: { action in
+                self.dismiss(animated: false)
+            }))
+            present(alertController, animated: true)
+        }
     }
     
     func selectPhotoInLibrary() {
+        imagePicker?.sourceType = .photoLibrary
         
+        guard let imagePicker = imagePicker else { return }
+        present(imagePicker, animated: true)
     }
 }
 
 extension PhotoPickerController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        imagePicker?.dismiss(animated: true) {
+            self.dismiss(animated: false)
+        }
+    }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let image = info[UIImagePickerControllerOriginalImage]
+        
+        imagePicker?.dismiss(animated: true) {
+            self.dismiss(animated: false) {
+                guard let image = image as? UIImage else { return }
+                self.delegate?.getFromPicker(image)
+            }
+        }
+    }
 }
 

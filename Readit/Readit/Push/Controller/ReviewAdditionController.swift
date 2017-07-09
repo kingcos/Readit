@@ -22,7 +22,7 @@ class ReviewAdditionController: UIViewController {
 
 extension ReviewAdditionController {
     func setupUI() {
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = .white
         
         setupHeader()
     }
@@ -41,7 +41,33 @@ extension ReviewAdditionController {
 extension ReviewAdditionController: ReviewAdditionHeaderViewDelegate {
     func selectCover() {
         let controller = PhotoPickerController()
+        controller.delegate = self
         present(controller, animated: true)
+    }
+}
+
+extension ReviewAdditionController: PhotoPickerControllerDelegate, VPImageCropperDelegate {
+    func getFromPicker(_ image: UIImage) {
+        let cropFrame = CGRect(x: 0.0, y: 100.0,
+                               width: SCREEN_WIDTH, height: SCREEN_WIDTH * 1.273)
+        let cropController = VPImageCropperViewController(image: image,
+                                                      cropFrame: cropFrame,
+                                                      limitScaleRatio: 3)
+        
+        cropController?.delegate = self
+        
+        guard let controller = cropController else { return }
+        present(controller, animated: true)
+    }
+    
+    func imageCropper(_ cropperViewController: VPImageCropperViewController!, didFinished editedImage: UIImage!) {
+        headerView?.bookCover?.setImage(editedImage, for: .normal)
+        
+        cropperViewController.dismiss(animated: true)
+    }
+    
+    func imageCropperDidCancel(_ cropperViewController: VPImageCropperViewController!) {
+        cropperViewController.dismiss(animated: true)
     }
 }
 

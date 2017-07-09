@@ -32,5 +32,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>获取您的相册以设置图片封面</string>
+	<key>NSCameraUsageDescription</key>
+	<string>使用你的摄像头以拍摄图片作为封面</string>
 </dict>
 </plist>
