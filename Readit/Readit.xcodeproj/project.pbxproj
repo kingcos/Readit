@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5DC425336B16F3F056E50562 /* Pods_Readit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA43621039501E0FDBD42AF8 /* Pods_Readit.framework */; };
+		84218E281F12742D000FF09B /* XKeyBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 84218E271F12742D000FF09B /* XKeyBoard.m */; };
 		846AF8BE1F10DBAD00800464 /* ReviewAdditionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8BD1F10DBAD00800464 /* ReviewAdditionController.swift */; };
 		846AF8C31F10E48700800464 /* GeneralFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8C21F10E48700800464 /* GeneralFactory.swift */; };
 		846AF8C61F10E9DA00800464 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8C51F10E9DA00800464 /* UIViewController+Extension.swift */; };
@@ -64,6 +65,8 @@
 
 /* Begin PBXFileReference section */
 		4F32C1FF20B608DFF325FAE0 /* Pods-Readit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Readit.release.xcconfig"; path = "Pods/Target Support Files/Pods-Readit/Pods-Readit.release.xcconfig"; sourceTree = "<group>"; };
+		84218E261F12742D000FF09B /* XKeyBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XKeyBoard.h; sourceTree = "<group>"; };
+		84218E271F12742D000FF09B /* XKeyBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XKeyBoard.m; sourceTree = "<group>"; };
 		846AF8BD1F10DBAD00800464 /* ReviewAdditionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewAdditionController.swift; sourceTree = "<group>"; };
 		846AF8C21F10E48700800464 /* GeneralFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralFactory.swift; sourceTree = "<group>"; };
 		846AF8C51F10E9DA00800464 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -155,6 +158,15 @@
 				4F32C1FF20B608DFF325FAE0 /* Pods-Readit.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		84218E251F12742D000FF09B /* XKeyBoard */ = {
+			isa = PBXGroup;
+			children = (
+				84218E261F12742D000FF09B /* XKeyBoard.h */,
+				84218E271F12742D000FF09B /* XKeyBoard.m */,
+			);
+			path = XKeyBoard;
 			sourceTree = "<group>";
 		};
 		846AF8BF1F10E3F700800464 /* Factory */ = {
@@ -269,6 +281,7 @@
 		8476E3421F10C7F10098700C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				84218E251F12742D000FF09B /* XKeyBoard */,
 				846AF92C1F12167C00800464 /* IGLDropDownMenu */,
 				846AF9071F1208C200800464 /* AKSegmentedControl */,
 				846AF9011F11D9BE00800464 /* LDXScore */,
@@ -659,6 +672,7 @@
 				846AF8FE1F11CD0100800464 /* PushCategoryController.swift in Sources */,
 				846AF8F81F11503000800464 /* VPImageCropperViewController.m in Sources */,
 				846AF8CA1F10F31000800464 /* ReviewAdditionHeaderView.swift in Sources */,
+				84218E281F12742D000FF09B /* XKeyBoard.m in Sources */,
 				846AF8C61F10E9DA00800464 /* UIViewController+Extension.swift in Sources */,
 				846AF8FA1F11CCDB00800464 /* PushTitleController.swift in Sources */,
 				846AF9311F12167C00800464 /* IGLDropDownMenu.m in Sources */,

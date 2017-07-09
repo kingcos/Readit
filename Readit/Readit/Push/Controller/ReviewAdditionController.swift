@@ -20,8 +20,10 @@ class ReviewAdditionController: UIViewController {
     var reviewScore: LDXScore?
     var isShowingScore = false
     
-    var currentType = "文学"
-    var detailType = "文学"
+    var reviewCurrentType = "文学"
+    var reviewDetailType = "文学"
+    
+    var reviewContent = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,12 +132,18 @@ extension ReviewAdditionController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             cell.detailTextLabel?.text = reviewTitle
-        case 1:
-            break
+            cell.accessoryType = .disclosureIndicator
         case 2:
             if !isShowingScore {
-                cell.detailTextLabel?.text = currentType + "->" + detailType
+                cell.detailTextLabel?.text = reviewCurrentType + "->" + reviewDetailType
             }
+        case 4:
+            cell.accessoryType = .none
+            let frame = CGRect(x: 10.0, y: 4.0, width: SCREEN_WIDTH - 20.0, height: 80)
+            let contentView = UITextView(frame: frame)
+            contentView.isEditable = false
+            contentView.text = reviewContent
+            cell.contentView.addSubview(contentView)
         default:
             break
         }
@@ -165,10 +173,28 @@ extension ReviewAdditionController: UITableViewDelegate, UITableViewDataSource {
                 setReviewLevel()
             }
         case 3:
-            setReviewContent()
+            if !isShowingScore {
+                setReviewContent()
+            } else {
+                setReviewCategory()
+            }
+        case 4:
+            if isShowingScore {
+                setReviewContent()
+            }
         default:
             break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if isShowingScore && indexPath.row > 4 {
+            return 88.0
+        } else if !isShowingScore && indexPath.row >= 4 {
+            return 88.0
+        }
+        
+        return 44.0
     }
 }
 
@@ -223,15 +249,15 @@ extension ReviewAdditionController {
         button1.setTitleColor(UIColor(38, 82, 67), for: .normal)
         button2.setTitleColor(UIColor(38, 82, 67), for: .normal)
         
-        controller.currentType = currentType
-        controller.detailType = detailType
+        controller.currentType = reviewCurrentType
+        controller.detailType = reviewDetailType
         controller.callBack = { [weak self] currentType, detailType in
             guard let strongSelf = self,
                   let currentType = currentType,
                   let detailType = detailType else { return }
             
-            strongSelf.currentType = currentType
-            strongSelf.detailType = detailType
+            strongSelf.reviewCurrentType = currentType
+            strongSelf.reviewDetailType = detailType
             
             strongSelf.tableView?.reloadData()
         }
@@ -242,6 +268,24 @@ extension ReviewAdditionController {
     func setReviewContent() {
         let controller = PushContentController()
         GeneralFactory.addTitle(in: controller)
+        
+        controller.textView?.text = reviewContent
+        controller.callBack = { [weak self] content in
+            guard let strongSelf = self,
+                  let content = content else { return }
+            strongSelf.reviewContent = content
+            
+            if strongSelf.tableViewTitles.last == "" {
+                strongSelf.tableViewTitles.removeLast()
+            }
+            
+            if content != "" {
+                strongSelf.tableViewTitles.append("")
+            }
+            
+            strongSelf.tableView?.reloadData()
+        }
+        
         present(controller, animated: true)
     }
 }
