@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PhotoPickerControllerDelegate {
+protocol PhotoPickerControllerDelegate: class {
     func getFromPicker(_ image: UIImage)
 }
 
@@ -24,7 +24,7 @@ class PhotoPickerController: UIViewController {
     
     var imagePicker: UIImagePickerController?
     
-    var delegate: PhotoPickerControllerDelegate?
+    weak var delegate: PhotoPickerControllerDelegate?
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

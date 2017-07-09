@@ -3,3 +3,4 @@
 //
 
 #import "VPImageCropperViewController.h"
+#import "LDXScore.h"

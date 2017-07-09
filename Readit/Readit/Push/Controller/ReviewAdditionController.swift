@@ -17,7 +17,8 @@ class ReviewAdditionController: UIViewController {
     
     var tableViewTitles = [String]()
     var reviewTitle = ""
-    
+    var reviewScore: LDXScore?
+    var isShowingScore = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,9 @@ class ReviewAdditionController: UIViewController {
         setupUI()
     }
 
+    deinit {
+        print("ReviewAdditionController", #function)
+    }
 }
 
 extension ReviewAdditionController {
@@ -60,6 +64,13 @@ extension ReviewAdditionController {
         view.addSubview(tableView)
         
         tableViewTitles = ["标题", "评分", "分类", "书评"]
+        
+        reviewScore = LDXScore(frame: CGRect(x: 100.0, y: 10.0, width: 100.0, height: 22.0))
+        reviewScore?.isSelect = true
+        reviewScore?.normalImg = #imageLiteral(resourceName: "btn_star_evaluation_normal")
+        reviewScore?.highlightImg = #imageLiteral(resourceName: "btn_star_evaluation_press")
+        reviewScore?.max_star = 5
+        reviewScore?.show_star = 5
     }
 }
 
@@ -109,15 +120,25 @@ extension ReviewAdditionController: UITableViewDelegate, UITableViewDataSource {
             view.removeFromSuperview()
         }
         
-        if indexPath.row != 1 {
+        if indexPath.row != 1 && !isShowingScore {
             cell.accessoryType = .disclosureIndicator
         }
         
         switch indexPath.row {
         case 0:
             cell.detailTextLabel?.text = reviewTitle
+        case 1:
+            break
+        case 2:
+            break
         default:
             break
+        }
+        
+        if isShowingScore && indexPath.row == 2 {
+            if let reviewScore = reviewScore {
+                cell.contentView.addSubview(reviewScore)
+            }
         }
         
         cell.textLabel?.text = tableViewTitles[indexPath.row]
@@ -133,7 +154,11 @@ extension ReviewAdditionController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             setReviewLevel()
         case 2:
-            setReviewCategory()
+            if !isShowingScore {
+                setReviewCategory()
+            } else {
+                setReviewLevel()
+            }
         case 3:
             setReviewContent()
         default:
@@ -157,9 +182,30 @@ extension ReviewAdditionController {
     }
     
     func setReviewLevel() {
-        let controller = PushLevelController()
-        GeneralFactory.addTitle(in: controller)
-        present(controller, animated: true)
+        isShowingScore = !isShowingScore
+        
+        if isShowingScore {
+            tableView?.beginUpdates()
+            
+            let tempIndexPath = IndexPath(row: 2, section: 0)
+            
+            tableViewTitles.insert("", at: 2)
+            tableView?.insertRows(at: [tempIndexPath], with: .left)
+            
+            tableView?.endUpdates()
+        } else {
+            tableView?.beginUpdates()
+            
+            guard let reviewScore = reviewScore else { return }
+            tableView?.cellForRow(at: IndexPath(row: 1, section: 0))?.detailTextLabel?.text = "\(reviewScore.show_star)"
+            
+            let tempIndexPath = IndexPath(row: 2, section: 0)
+            
+            tableViewTitles.remove(at: 2)
+            tableView?.deleteRows(at: [tempIndexPath], with: .right)
+            
+            tableView?.endUpdates()
+        }
     }
     
     func setReviewCategory() {

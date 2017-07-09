@@ -9,7 +9,7 @@
 import UIKit
 import JVFloatLabeledTextField
 
-protocol ReviewAdditionHeaderViewDelegate {
+protocol ReviewAdditionHeaderViewDelegate: class {
     func selectCover()
 }
 
@@ -25,7 +25,7 @@ class ReviewAdditionHeaderView: UIView {
     var bookName: JVFloatLabeledTextField?
     var bookEditor: JVFloatLabeledTextField?
     
-    var delegate: ReviewAdditionHeaderViewDelegate?
+    weak var delegate: ReviewAdditionHeaderViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
