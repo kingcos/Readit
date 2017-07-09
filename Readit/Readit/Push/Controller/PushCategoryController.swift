@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias CallBackPushCategory = (_ currentType: String?, _ detaiType: String?) -> ()
+
 class PushCategoryController: UIViewController {
 
     var segmentLabel: UILabel?
@@ -31,8 +33,10 @@ class PushCategoryController: UIViewController {
     var dropDownMenu1: IGLDropDownMenu?
     var dropDownMenu2: IGLDropDownMenu?
     
-    var currentType = "文学"
-    var detailType = "文学"
+    var currentType: String?
+    var detailType: String?
+    
+    var callBack: CallBackPushCategory?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -297,6 +301,8 @@ extension PushCategoryController {
 
 extension PushCategoryController {
     override func sure() {
-        
+        guard let callBack = callBack else { return }
+        callBack(currentType, detailType)
+        dismiss(animated: true)
     }
 }

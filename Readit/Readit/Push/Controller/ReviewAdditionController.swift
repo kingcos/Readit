@@ -20,6 +20,9 @@ class ReviewAdditionController: UIViewController {
     var reviewScore: LDXScore?
     var isShowingScore = false
     
+    var currentType = "文学"
+    var detailType = "文学"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -130,7 +133,9 @@ extension ReviewAdditionController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             break
         case 2:
-            break
+            if !isShowingScore {
+                cell.detailTextLabel?.text = currentType + "->" + detailType
+            }
         default:
             break
         }
@@ -217,6 +222,19 @@ extension ReviewAdditionController {
         
         button1.setTitleColor(UIColor(38, 82, 67), for: .normal)
         button2.setTitleColor(UIColor(38, 82, 67), for: .normal)
+        
+        controller.currentType = currentType
+        controller.detailType = detailType
+        controller.callBack = { [weak self] currentType, detailType in
+            guard let strongSelf = self,
+                  let currentType = currentType,
+                  let detailType = detailType else { return }
+            
+            strongSelf.currentType = currentType
+            strongSelf.detailType = detailType
+            
+            strongSelf.tableView?.reloadData()
+        }
         
         present(controller, animated: true)
     }

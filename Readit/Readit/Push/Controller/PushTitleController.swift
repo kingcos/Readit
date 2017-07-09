@@ -8,12 +8,12 @@
 
 import UIKit
 
-typealias callBackPush = (_ content: String?) -> ()
+typealias CallBackPushTitle = (_ title: String?) -> ()
 
 class PushTitleController: UIViewController {
 
     var titleTextField: UITextField?
-    var callBack: callBackPush?
+    var callBack: CallBackPushTitle?
     
     override func viewDidLoad() {
         super.viewDidLoad()
