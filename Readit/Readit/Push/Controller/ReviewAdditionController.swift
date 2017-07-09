@@ -40,7 +40,7 @@ extension ReviewAdditionController {
     }
     
     func setupHeader() {
-        headerView = ReviewAdditionHeaderView(frame: CGRect(x: 0.0, y: 40.0,
+        headerView = ReviewAdditionHeaderView(frame: CGRect(x: 0.0, y: 45.0,
                                                             width: SCREEN_WIDTH, height: 160.0))
         headerView?.delegate = self
         
@@ -65,7 +65,7 @@ extension ReviewAdditionController {
         
         tableViewTitles = ["标题", "评分", "分类", "书评"]
         
-        reviewScore = LDXScore(frame: CGRect(x: 100.0, y: 10.0, width: 100.0, height: 22.0))
+        reviewScore = LDXScore(frame: CGRect(x: SCREEN_WIDTH - 100.0, y: 10.0, width: 100.0, height: 22.0))
         reviewScore?.isSelect = true
         reviewScore?.normalImg = #imageLiteral(resourceName: "btn_star_evaluation_normal")
         reviewScore?.highlightImg = #imageLiteral(resourceName: "btn_star_evaluation_press")
@@ -211,6 +211,13 @@ extension ReviewAdditionController {
     func setReviewCategory() {
         let controller = PushCategoryController()
         GeneralFactory.addTitle(in: controller)
+        
+        guard let button1 = controller.view.viewWithTag(1000) as? UIButton else { return }
+        guard let button2 = controller.view.viewWithTag(1001) as? UIButton else { return }
+        
+        button1.setTitleColor(UIColor(38, 82, 67), for: .normal)
+        button2.setTitleColor(UIColor(38, 82, 67), for: .normal)
+        
         present(controller, animated: true)
     }
     

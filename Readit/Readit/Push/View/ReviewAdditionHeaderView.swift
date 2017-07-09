@@ -46,13 +46,13 @@ extension ReviewAdditionHeaderView {
         bookCover?.addTarget(self, action: #selector(selectCover), for: .touchUpInside)
         
         bookName = JVFloatLabeledTextField(frame: CGRect(x: 128.0,
-                                                         y: 8.0 + 40.0,
+                                                         y: 40.0,
                                                          width: SCREEN_WIDTH - 128.0 - 15.0,
                                                          height: 30.0))
         bookName?.placeholder = "书名"
         
         bookEditor = JVFloatLabeledTextField(frame: CGRect(x: 128.0,
-                                                           y: 8.0 + 40.0 + 70.0,
+                                                           y: 40.0 + 70.0,
                                                            width: SCREEN_WIDTH - 128.0 - 15.0,
                                                            height: 30.0))
         bookEditor?.placeholder = "作者"

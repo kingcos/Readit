@@ -34,7 +34,7 @@ extension PushController {
         let addBookButton = UIButton(frame: CGRect(x: 20.0, y: 20.0, width: SCREEN_WIDTH, height: 45.0))
         addBookButton.setImage(#imageLiteral(resourceName: "plus circle"), for: .normal)
         addBookButton.setTitleColor(.black, for: .normal)
-        addBookButton.setTitle("新建书评", for: .normal)
+        addBookButton.setTitle(" 新建书评", for: .normal)
         addBookButton.contentHorizontalAlignment = .left
         addBookButton.addTarget(self, action: #selector(PushController.pushReviewAdditionController),
                                 for: .touchUpInside)
