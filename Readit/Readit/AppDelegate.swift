@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LeanCloud
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        setupLeanCloud()
         setupWindow()
         
         return true
@@ -55,5 +57,9 @@ extension AppDelegate {
         
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
+    }
+    
+    func setupLeanCloud() {
+        LeanCloud.initialize(applicationID: "M4A5qpg7aploMttI5R1dYock-gzGzoHsz", applicationKey: "1NovDStWvroPtwx4h1GqSLul")
     }
 }

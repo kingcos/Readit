@@ -36,7 +36,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCN-8u-AsQ">
                                 <rect key="frame" x="16" y="318" width="343" height="30"/>
@@ -87,6 +87,7 @@
                     </view>
                     <connections>
                         <outlet property="passwordTextField" destination="xhs-oN-M1l" id="wPL-QX-uPA"/>
+                        <outlet property="topConstraint" destination="yoO-zb-jcO" id="DDe-dE-8dY"/>
                         <outlet property="userNameTextField" destination="mcx-6v-NDu" id="rwg-c7-Rr0"/>
                     </connections>
                 </viewController>
@@ -120,7 +121,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5AS-sA-PCT">
                                 <rect key="frame" x="16" y="278" width="343" height="30"/>
@@ -186,6 +187,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="PBT-2e-mTC" id="N4L-1A-wsr"/>
                         <outlet property="passwordTextField" destination="5AS-sA-PCT" id="dI2-c1-bLI"/>
+                        <outlet property="topConstraint" destination="N8d-rz-Xjb" id="hzx-HM-74V"/>
                         <outlet property="userNameTextField" destination="CjR-fc-hvz" id="uI5-Nd-OtL"/>
                     </connections>
                 </viewController>
