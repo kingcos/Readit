@@ -15,3 +15,6 @@ let SCREEN_HEIGHT = UIScreen.main.bounds.height
 // MARK: - Color
 let COLOR_MAIN_RED = UIColor(235, 114, 118)
 
+// MARK: - ID
+let ID_SB_REGISTER = "ID_SB_REGISTER"
+let ID_SB_LOGIN = "ID_SB_LOGIN"
