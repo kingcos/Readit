@@ -9,4 +9,5 @@ target 'Readit' do
   pod 'LeanCloud'
   pod 'JVFloatLabeledTextField'
   pod 'ProgressHUD'
+  pod 'MJRefresh'
 end

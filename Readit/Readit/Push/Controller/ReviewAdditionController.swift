@@ -9,10 +9,10 @@
 import UIKit
 import ProgressHUD
 
-let cellIdentifier = "Cell"
-
 class ReviewAdditionController: UIViewController {
 
+    let cellIdentifier = "ReviewAdditionCell"
+    
     var headerView: ReviewAdditionHeaderView?
     var tableView: UITableView?
     
