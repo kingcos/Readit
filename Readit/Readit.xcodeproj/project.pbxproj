@@ -12,6 +12,7 @@
 		84218E321F12A2D5000FF09B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84218E2F1F12A2D5000FF09B /* Login.storyboard */; };
 		84218E331F12A2D5000FF09B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84218E301F12A2D5000FF09B /* LoginController.swift */; };
 		84218E341F12A2D5000FF09B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84218E311F12A2D5000FF09B /* RegisterController.swift */; };
+		84218E361F131A2E000FF09B /* BookReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84218E351F131A2E000FF09B /* BookReview.swift */; };
 		846AF8BE1F10DBAD00800464 /* ReviewAdditionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8BD1F10DBAD00800464 /* ReviewAdditionController.swift */; };
 		846AF8C31F10E48700800464 /* GeneralFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8C21F10E48700800464 /* GeneralFactory.swift */; };
 		846AF8C61F10E9DA00800464 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846AF8C51F10E9DA00800464 /* UIViewController+Extension.swift */; };
@@ -73,6 +74,7 @@
 		84218E2F1F12A2D5000FF09B /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		84218E301F12A2D5000FF09B /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		84218E311F12A2D5000FF09B /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
+		84218E351F131A2E000FF09B /* BookReview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookReview.swift; sourceTree = "<group>"; };
 		846AF8BD1F10DBAD00800464 /* ReviewAdditionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewAdditionController.swift; sourceTree = "<group>"; };
 		846AF8C21F10E48700800464 /* GeneralFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralFactory.swift; sourceTree = "<group>"; };
 		846AF8C51F10E9DA00800464 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 		8476E3541F10C95D0098700C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				84218E351F131A2E000FF09B /* BookReview.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -685,6 +688,7 @@
 				846AF8CA1F10F31000800464 /* ReviewAdditionHeaderView.swift in Sources */,
 				84218E281F12742D000FF09B /* XKeyBoard.m in Sources */,
 				846AF8C61F10E9DA00800464 /* UIViewController+Extension.swift in Sources */,
+				84218E361F131A2E000FF09B /* BookReview.swift in Sources */,
 				84218E341F12A2D5000FF09B /* RegisterController.swift in Sources */,
 				846AF8FA1F11CCDB00800464 /* PushTitleController.swift in Sources */,
 				846AF9311F12167C00800464 /* IGLDropDownMenu.m in Sources */,
