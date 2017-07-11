@@ -7,11 +7,12 @@
 //
 
 import UIKit
-
-let cellIdentifier = "Cell"
+import ProgressHUD
 
 class ReviewAdditionController: UIViewController {
 
+    let cellIdentifier = "ReviewAdditionCell"
+    
     var headerView: ReviewAdditionHeaderView?
     var tableView: UITableView?
     
@@ -29,14 +30,35 @@ class ReviewAdditionController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+        setupData()
     }
 
     deinit {
         print("ReviewAdditionController", #function)
+        
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
 extension ReviewAdditionController {
+    func setupData() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(addedReview(_:)),
+                                               name: NSNotification.Name(rawValue: "addedReview"),
+                                               object: nil)
+    }
+    
+    func addedReview(_ notification: Notification) {
+        guard let result = notification.userInfo?["success"] as? String else { return }
+        
+        if result == "true" {
+            ProgressHUD.showSuccess("上传成功")
+            dismiss(animated: true)
+        } else {
+            ProgressHUD.showError("上传失败")
+        }
+    }
+    
     func setupUI() {
         view.backgroundColor = .white
         
@@ -133,8 +155,14 @@ extension ReviewAdditionController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             cell.detailTextLabel?.text = reviewTitle
             cell.accessoryType = .disclosureIndicator
+        case 1:
+            cell.detailTextLabel?.text = "\(reviewScore?.show_star ?? 5)"
         case 2:
             if !isShowingScore {
+                cell.detailTextLabel?.text = reviewCurrentType + "->" + reviewDetailType
+            }
+        case 3:
+            if isShowingScore {
                 cell.detailTextLabel?.text = reviewCurrentType + "->" + reviewDetailType
             }
         case 4:
@@ -215,6 +243,9 @@ extension ReviewAdditionController {
     func setReviewLevel() {
         isShowingScore = !isShowingScore
         
+        guard let reviewScore = reviewScore else { return }
+        tableView?.cellForRow(at: IndexPath(row: 1, section: 0))?.detailTextLabel?.text = "\(reviewScore.show_star)"
+        
         if isShowingScore {
             tableView?.beginUpdates()
             
@@ -226,9 +257,6 @@ extension ReviewAdditionController {
             tableView?.endUpdates()
         } else {
             tableView?.beginUpdates()
-            
-            guard let reviewScore = reviewScore else { return }
-            tableView?.cellForRow(at: IndexPath(row: 1, section: 0))?.detailTextLabel?.text = "\(reviewScore.show_star)"
             
             let tempIndexPath = IndexPath(row: 2, section: 0)
             
@@ -291,7 +319,23 @@ extension ReviewAdditionController {
 }
 
 extension ReviewAdditionController {
+    
     override func sure() {
+        guard let bookCover = headerView?.bookCover?.currentImage,
+        let bookName = headerView?.bookName?.text,
+        let bookEditor = headerView?.bookEditor?.text else { return }
         
+        let dict = [
+            "bookCover": bookCover,
+            "bookName": bookName,
+            "bookEditor": bookEditor,
+            "reviewTitle": reviewTitle,
+            "reviewScore": "\(reviewScore?.show_star ?? 5)",
+            "reviewCurrentType": reviewCurrentType,
+            "reviewDetailType": reviewDetailType,
+            "reviewContent": reviewContent
+        ] as [String : Any]
+        
+        BookReview.pushReviewBy(dict)
     }
 }

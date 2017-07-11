@@ -8,4 +8,6 @@ target 'Readit' do
   # Pods for Readit
   pod 'LeanCloud'
   pod 'JVFloatLabeledTextField'
+  pod 'ProgressHUD'
+  pod 'MJRefresh'
 end
