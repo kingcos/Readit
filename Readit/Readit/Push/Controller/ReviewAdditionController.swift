@@ -167,11 +167,21 @@ extension ReviewAdditionController: UITableViewDelegate, UITableViewDataSource {
             }
         case 4:
             cell.accessoryType = .none
-            let frame = CGRect(x: 10.0, y: 4.0, width: SCREEN_WIDTH - 20.0, height: 80)
-            let contentView = UITextView(frame: frame)
-            contentView.isEditable = false
-            contentView.text = reviewContent
-            cell.contentView.addSubview(contentView)
+            if !isShowingScore {
+                let frame = CGRect(x: 10.0, y: 4.0, width: SCREEN_WIDTH - 20.0, height: 80)
+                let contentView = UITextView(frame: frame)
+                contentView.isEditable = false
+                contentView.text = reviewContent
+                cell.contentView.addSubview(contentView)
+            }
+        case 5:
+            if isShowingScore {
+                let frame = CGRect(x: 10.0, y: 4.0, width: SCREEN_WIDTH - 20.0, height: 80)
+                let contentView = UITextView(frame: frame)
+                contentView.isEditable = false
+                contentView.text = reviewContent
+                cell.contentView.addSubview(contentView)
+            }
         default:
             break
         }
@@ -330,7 +340,7 @@ extension ReviewAdditionController {
             "bookName": bookName,
             "bookEditor": bookEditor,
             "reviewTitle": reviewTitle,
-            "reviewScore": "\(reviewScore?.show_star ?? 5)",
+            "reviewScore": reviewScore?.show_star ?? 5,
             "reviewCurrentType": reviewCurrentType,
             "reviewDetailType": reviewDetailType,
             "reviewContent": reviewContent

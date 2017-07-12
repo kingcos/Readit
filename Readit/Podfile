@@ -6,7 +6,8 @@ target 'Readit' do
   use_frameworks!
 
   # Pods for Readit
-  pod 'LeanCloud'
+  pod 'Kingfisher'
+  pod 'AVOSCloud'
   pod 'JVFloatLabeledTextField'
   pod 'ProgressHUD'
   pod 'MJRefresh'

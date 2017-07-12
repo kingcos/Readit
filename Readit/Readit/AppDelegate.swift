@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LeanCloud
+import AVOSCloud
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -60,6 +60,6 @@ extension AppDelegate {
     }
     
     func setupLeanCloud() {
-        LeanCloud.initialize(applicationID: "M4A5qpg7aploMttI5R1dYock-gzGzoHsz", applicationKey: "1NovDStWvroPtwx4h1GqSLul")
+        AVOSCloud.setApplicationId("M4A5qpg7aploMttI5R1dYock-gzGzoHsz", clientKey: "1NovDStWvroPtwx4h1GqSLul")
     }
 }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LeanCloud
+import AVOSCloud
 
 class RankController: UIViewController {
 
@@ -22,7 +22,7 @@ class RankController: UIViewController {
 
 extension RankController {
     func checkUserLogin() {
-        if LCUser.current == nil {
+        if AVUser.current() == nil {
             let storyBoard = UIStoryboard(name: "Login", bundle: nil)
             let loginController = storyBoard.instantiateViewController(withIdentifier: ID_SB_LOGIN)
             
