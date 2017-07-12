@@ -9,6 +9,7 @@
 import UIKit
 import AVOSCloud
 import Kingfisher
+import ProgressHUD
 
 class ReviewDetailController: UIViewController {
     
@@ -36,6 +37,8 @@ extension ReviewDetailController {
         setupReviewDetailView()
         setupTabBarView()
         setupTextView()
+        
+        isLikedOrNot()
     }
     
     func setupReviewDetailView() {
@@ -68,8 +71,6 @@ extension ReviewDetailController {
         
         reviewDetailView.reviewScore?.show_star = reviewScore
         reviewDetailView.moreLabel?.text = "喜欢:100 评论:199 浏览:19999"
-        
-        
     }
     
     func setupTabBarView() {
@@ -108,11 +109,72 @@ extension ReviewDetailController: ReviewTabBarViewDelegate {
         print(#function)
     }
     
-    func likeButtonClick() {
-        print(#function)
+    func likeButtonClick(_ sender: UIButton) {
+        sender.isEnabled = false
+        sender.setImage(#imageLiteral(resourceName: "redheart"), for: .normal)
+        
+        guard let user = AVUser.current(),
+              let review = review else { return }
+        
+        let query = AVQuery(className: "Like")
+        
+        query.whereKey("user", equalTo: user)
+        query.whereKey("review", equalTo: review)
+        
+        query.findObjectsInBackground { results, error in
+            guard error == nil else {
+                ProgressHUD.showError("操作失败")
+                return
+            }
+            guard let results = results as? [AVObject] else { return }
+            
+            if results.count != 0 {
+                for result in results {
+                    result.deleteEventually()
+                }
+                sender.setImage(#imageLiteral(resourceName: "heart"), for: .normal)
+            } else {
+                let object = AVObject(className: "Like")
+                object.setObject(AVUser.current(), forKey: "user")
+                object.setObject(review, forKey: "review")
+                
+                object.saveInBackground({ result, error in
+                    if result {
+                        sender.setImage(#imageLiteral(resourceName: "solidheart"), for: .normal)
+                    } else {
+                        ProgressHUD.showError("操作失败")
+                    }
+                })
+            }
+        
+            sender.isEnabled = true
+        }
     }
     
     func shareButtonClick() {
         print(#function)
+    }
+}
+
+extension ReviewDetailController {
+    func isLikedOrNot() {
+        guard let user = AVUser.current(),
+              let review = review else { return }
+        
+        let query = AVQuery(className: "Like")
+        
+        query.whereKey("user", equalTo: user)
+        query.whereKey("review", equalTo: review)
+        
+        query.findObjectsInBackground { results, error in
+            if error == nil {
+                if results != nil && results?.count != 0 {
+                    let button = self.reviewTabBarView?.viewWithTag(2002) as? UIButton
+                    button?.setImage(#imageLiteral(resourceName: "solidheart"), for: .normal)
+                }
+            } else {
+                ProgressHUD.showError("操作失败")
+            }
+        }
     }
 }

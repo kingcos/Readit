@@ -14,7 +14,7 @@ protocol ReviewTabBarViewDelegate: class {
     
     func commentAreaButtonClick()
     
-    func likeButtonClick()
+    func likeButtonClick(_ sender: UIButton)
     
     func shareButtonClick()
 }
@@ -77,7 +77,7 @@ extension ReviewTabBarView {
         case 2001:
             delegate?.commentAreaButtonClick()
         case 2002:
-            delegate?.likeButtonClick()
+            delegate?.likeButtonClick(sender)
         case 2003:
             delegate?.shareButtonClick()
         default:
