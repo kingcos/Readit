@@ -68,6 +68,7 @@
 		8485C8C11F10C61100553143 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8485C8C01F10C61100553143 /* AppDelegate.swift */; };
 		8485C8C81F10C61100553143 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8485C8C71F10C61100553143 /* Assets.xcassets */; };
 		8485C8CB1F10C61100553143 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8485C8C91F10C61100553143 /* LaunchScreen.storyboard */; };
+		84F8D3961F1653230071826D /* ReviewTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8D3951F1653230071826D /* ReviewTabBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +142,7 @@
 		8485C8C71F10C61100553143 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8485C8CA1F10C61100553143 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8485C8CC1F10C61100553143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84F8D3951F1653230071826D /* ReviewTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTabBarView.swift; sourceTree = "<group>"; };
 		8A03959E024740032481BF91 /* Pods-Readit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Readit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Readit/Pods-Readit.debug.xcconfig"; sourceTree = "<group>"; };
 		AA43621039501E0FDBD42AF8 /* Pods_Readit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Readit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -417,6 +419,7 @@
 				846AF8C91F10F31000800464 /* ReviewAdditionHeaderView.swift */,
 				84218E371F13D792000FF09B /* ReviewCell.swift */,
 				84218E3D1F14780F000FF09B /* ReviewDetailView.swift */,
+				84F8D3951F1653230071826D /* ReviewTabBarView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -687,6 +690,7 @@
 				846AF8C31F10E48700800464 /* GeneralFactory.swift in Sources */,
 				846AF91B1F1208C200800464 /* AKSegmentedControl.m in Sources */,
 				8476E3631F10C9B90098700C /* SearchController.swift in Sources */,
+				84F8D3961F1653230071826D /* ReviewTabBarView.swift in Sources */,
 				84218E331F12A2D5000FF09B /* LoginController.swift in Sources */,
 				846AF9321F12167C00800464 /* IGLDropDownItem.m in Sources */,
 				846AF8F11F11230200800464 /* PhotoPickerController.swift in Sources */,

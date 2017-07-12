@@ -94,7 +94,7 @@ class ReviewDetailView: UIView {
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         context?.setLineWidth(0.5)
-        context?.setFillColor(red: 231/255, green: 231/255, blue: 231/255, alpha: 1.0)
+        context?.setStrokeColor(red: 231/255, green: 231/255, blue: 231/255, alpha: 1.0)
         context?.move(to: CGPoint(x: 8.0, y: VIEW_HEIGHT - 2.0))
         context?.addLine(to: CGPoint(x: VIEW_WIDTH - 8.0, y: VIEW_HEIGHT - 2.0))
         context?.strokePath()

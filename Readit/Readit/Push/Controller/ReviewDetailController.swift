@@ -14,6 +14,8 @@ class ReviewDetailController: UIViewController {
     
     var review: AVObject?
     var reviewDetailView: ReviewDetailView?
+    var reviewTabBarView: ReviewTabBarView?
+    var reviewTextView: UITextView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,8 @@ extension ReviewDetailController {
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -80.0), for: .default)
         
         setupReviewDetailView()
+        setupTabBarView()
+        setupTextView()
     }
     
     func setupReviewDetailView() {
@@ -65,7 +69,50 @@ extension ReviewDetailController {
         reviewDetailView.reviewScore?.show_star = reviewScore
         reviewDetailView.moreLabel?.text = "喜欢:100 评论:199 浏览:19999"
         
+        
     }
     
+    func setupTabBarView() {
+        let frame = CGRect(x: 0.0,
+                           y: SCREEN_HEIGHT - 40.0,
+                           width: SCREEN_WIDTH,
+                           height: 40.0)
+        reviewTabBarView = ReviewTabBarView(frame: frame)
+        reviewTabBarView?.delegate = self
+        guard let reviewTabBarView = reviewTabBarView else { return }
+        view.addSubview(reviewTabBarView)
+    }
+    
+    func setupTextView() {
+        let frame = CGRect(x: 0.0,
+                           y: 64.0 + SCREEN_HEIGHT / 4.0,
+                           width: SCREEN_WIDTH,
+                           height: SCREEN_HEIGHT - 64.0 - SCREEN_HEIGHT / 4.0 - 40.0)
+        reviewTextView = UITextView(frame: frame)
+        reviewTextView?.isEditable = false
+        
+        guard let content = review?["reviewContent"] as? String,
+              let reviewTextView = reviewTextView else { return }
+        
+        reviewTextView.text = content
+        view.addSubview(reviewTextView)
+    }
 }
 
+extension ReviewDetailController: ReviewTabBarViewDelegate {
+    func writeCommentButtonClick() {
+        print(#function)
+    }
+    
+    func commentAreaButtonClick() {
+        print(#function)
+    }
+    
+    func likeButtonClick() {
+        print(#function)
+    }
+    
+    func shareButtonClick() {
+        print(#function)
+    }
+}
