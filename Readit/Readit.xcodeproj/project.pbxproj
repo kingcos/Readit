@@ -69,6 +69,12 @@
 		8485C8C81F10C61100553143 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8485C8C71F10C61100553143 /* Assets.xcassets */; };
 		8485C8CB1F10C61100553143 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8485C8C91F10C61100553143 /* LaunchScreen.storyboard */; };
 		84C3CAB91F174CDD00EBD30C /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3CAB81F174CDD00EBD30C /* CommentCell.swift */; };
+		84C3CAC71F17910500EBD30C /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3CABC1F17910500EBD30C /* SWCellScrollView.m */; };
+		84C3CAC81F17910500EBD30C /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3CABF1F17910500EBD30C /* SWUtilityButtonView.m */; };
+		84C3CAC91F17910500EBD30C /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3CAC11F17910500EBD30C /* SWUtilityButtonTapGestureRecognizer.m */; };
+		84C3CACA1F17910500EBD30C /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3CAC21F17910500EBD30C /* SWLongPressGestureRecognizer.m */; };
+		84C3CACB1F17910500EBD30C /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3CAC31F17910500EBD30C /* NSMutableArray+SWUtilityButtons.m */; };
+		84C3CACC1F17910500EBD30C /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C3CAC61F17910500EBD30C /* SWTableViewCell.m */; };
 		84F8D3961F1653230071826D /* ReviewTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8D3951F1653230071826D /* ReviewTabBarView.swift */; };
 		84F8D39D1F16969C0071826D /* InputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F8D3981F16969C0071826D /* InputView.xib */; };
 		84F8D39E1F16969C0071826D /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F8D3991F16969C0071826D /* InputView.m */; };
@@ -148,6 +154,18 @@
 		8485C8CA1F10C61100553143 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8485C8CC1F10C61100553143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84C3CAB81F174CDD00EBD30C /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		84C3CABB1F17910500EBD30C /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
+		84C3CABC1F17910500EBD30C /* SWCellScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCellScrollView.m; sourceTree = "<group>"; };
+		84C3CABD1F17910500EBD30C /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
+		84C3CABE1F17910500EBD30C /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
+		84C3CABF1F17910500EBD30C /* SWUtilityButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonView.m; sourceTree = "<group>"; };
+		84C3CAC01F17910500EBD30C /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewCell.h; sourceTree = "<group>"; };
+		84C3CAC11F17910500EBD30C /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
+		84C3CAC21F17910500EBD30C /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
+		84C3CAC31F17910500EBD30C /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
+		84C3CAC41F17910500EBD30C /* SWCellScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCellScrollView.h; sourceTree = "<group>"; };
+		84C3CAC51F17910500EBD30C /* SWUtilityButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUtilityButtonView.h; sourceTree = "<group>"; };
+		84C3CAC61F17910500EBD30C /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCell.m; sourceTree = "<group>"; };
 		84F8D3951F1653230071826D /* ReviewTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTabBarView.swift; sourceTree = "<group>"; };
 		84F8D3981F16969C0071826D /* InputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputView.xib; sourceTree = "<group>"; };
 		84F8D3991F16969C0071826D /* InputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputView.m; sourceTree = "<group>"; };
@@ -309,6 +327,7 @@
 		8476E3421F10C7F10098700C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				84C3CABA1F17910500EBD30C /* LeftSwipeCell */,
 				84F8D3971F16969C0071826D /* InputView */,
 				84218E251F12742D000FF09B /* XKeyBoard */,
 				846AF92C1F12167C00800464 /* IGLDropDownMenu */,
@@ -541,6 +560,25 @@
 			path = Readit;
 			sourceTree = "<group>";
 		};
+		84C3CABA1F17910500EBD30C /* LeftSwipeCell */ = {
+			isa = PBXGroup;
+			children = (
+				84C3CABB1F17910500EBD30C /* SWUtilityButtonTapGestureRecognizer.h */,
+				84C3CABC1F17910500EBD30C /* SWCellScrollView.m */,
+				84C3CABD1F17910500EBD30C /* NSMutableArray+SWUtilityButtons.h */,
+				84C3CABE1F17910500EBD30C /* SWLongPressGestureRecognizer.h */,
+				84C3CABF1F17910500EBD30C /* SWUtilityButtonView.m */,
+				84C3CAC01F17910500EBD30C /* SWTableViewCell.h */,
+				84C3CAC11F17910500EBD30C /* SWUtilityButtonTapGestureRecognizer.m */,
+				84C3CAC21F17910500EBD30C /* SWLongPressGestureRecognizer.m */,
+				84C3CAC31F17910500EBD30C /* NSMutableArray+SWUtilityButtons.m */,
+				84C3CAC41F17910500EBD30C /* SWCellScrollView.h */,
+				84C3CAC51F17910500EBD30C /* SWUtilityButtonView.h */,
+				84C3CAC61F17910500EBD30C /* SWTableViewCell.m */,
+			);
+			path = LeftSwipeCell;
+			sourceTree = "<group>";
+		};
 		84F8D3971F16969C0071826D /* InputView */ = {
 			isa = PBXGroup;
 			children = (
@@ -710,6 +748,7 @@
 			files = (
 				846AF9001F11CD1100800464 /* PushContentController.swift in Sources */,
 				84218E3E1F14780F000FF09B /* ReviewDetailView.swift in Sources */,
+				84C3CAC81F17910500EBD30C /* SWUtilityButtonView.m in Sources */,
 				8476E35B1F10C9880098700C /* CircleController.swift in Sources */,
 				8485C8C11F10C61100553143 /* AppDelegate.swift in Sources */,
 				846AF9061F11FFCC00800464 /* UIColor+Extension.swift in Sources */,
@@ -721,6 +760,7 @@
 				8476E3631F10C9B90098700C /* SearchController.swift in Sources */,
 				84F8D39F1F16969C0071826D /* UIViewExt.m in Sources */,
 				84F8D3961F1653230071826D /* ReviewTabBarView.swift in Sources */,
+				84C3CACC1F17910500EBD30C /* SWTableViewCell.m in Sources */,
 				84218E331F12A2D5000FF09B /* LoginController.swift in Sources */,
 				84C3CAB91F174CDD00EBD30C /* CommentCell.swift in Sources */,
 				846AF9321F12167C00800464 /* IGLDropDownItem.m in Sources */,
@@ -737,10 +777,14 @@
 				84218E341F12A2D5000FF09B /* RegisterController.swift in Sources */,
 				846AF8FA1F11CCDB00800464 /* PushTitleController.swift in Sources */,
 				84218E381F13D792000FF09B /* ReviewCell.swift in Sources */,
+				84C3CACB1F17910500EBD30C /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				846AF9311F12167C00800464 /* IGLDropDownMenu.m in Sources */,
 				84F8D39E1F16969C0071826D /* InputView.m in Sources */,
 				84218E3A1F14765C000FF09B /* ReviewDetailController.swift in Sources */,
 				8476E3611F10C9AC0098700C /* RankController.swift in Sources */,
+				84C3CAC91F17910500EBD30C /* SWUtilityButtonTapGestureRecognizer.m in Sources */,
+				84C3CAC71F17910500EBD30C /* SWCellScrollView.m in Sources */,
+				84C3CACA1F17910500EBD30C /* SWLongPressGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

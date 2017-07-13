@@ -8,3 +8,4 @@
 #import "IGLDropDownMenu.h"
 #import "XKeyBoard.h"
 #import "InputView.h"
+#import "SWTableViewCell.h"

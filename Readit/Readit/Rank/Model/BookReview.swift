@@ -10,18 +10,18 @@ import UIKit
 import AVOSCloud
 
 class BookReview: NSObject {
-    class func pushReviewBy(_ dict: [String: Any]) {
+    class func pushReview(_ review: AVObject?, by dict: [String: Any]) {
         guard let bookName = dict["bookName"] as? String,
-              let bookEditor = dict["bookEditor"] as? String,
-              let reviewTitle = dict["reviewTitle"] as? String,
-              let reviewScore = dict["reviewScore"] as? Int,
-              let reviewCurrentType = dict["reviewCurrentType"] as? String,
-              let reviewDetailType = dict["reviewDetailType"] as? String,
-              let reviewContent = dict["reviewContent"] as? String,
-              let image = dict["bookCover"] as? UIImage,
-              let bookCover = UIImagePNGRepresentation(image) else { return }
+            let bookEditor = dict["bookEditor"] as? String,
+            let reviewTitle = dict["reviewTitle"] as? String,
+            let reviewScore = dict["reviewScore"] as? Int,
+            let reviewCurrentType = dict["reviewCurrentType"] as? String,
+            let reviewDetailType = dict["reviewDetailType"] as? String,
+            let reviewContent = dict["reviewContent"] as? String,
+            let image = dict["bookCover"] as? UIImage,
+            let bookCover = UIImagePNGRepresentation(image) else { return }
         
-        let object = AVObject(className: "BookReview")
+        guard let object = review else { return }
         
         object.setObject(bookName, forKey: "bookName")
         object.setObject(bookEditor, forKey: "bookEditor")
@@ -31,7 +31,7 @@ class BookReview: NSObject {
         object.setObject(reviewDetailType, forKey: "reviewDetailType")
         object.setObject(reviewContent, forKey: "reviewContent")
         object.setObject(AVUser.current(), forKey: "user")
-
+        
         let coverFile = AVFile(data: bookCover)
         coverFile.saveInBackground { success, error in
             if success {
@@ -39,8 +39,8 @@ class BookReview: NSObject {
                 object.saveEventually { success, error in
                     if success {
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addedReview"),
-                                                                                  object: nil,
-                                                                                  userInfo:  ["success": "true"])
+                                                        object: nil,
+                                                        userInfo:  ["success": "true"])
                     } else {
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "addedReview"),
                                                         object: nil,

@@ -19,6 +19,8 @@ class PushController: UIViewController {
     var reviews = [AVObject]()
     var navigationView: UIView?
     var tableView: UITableView?
+    
+    var swipingCellIndex: IndexPath?
 
     override func viewDidAppear(_ animated: Bool) {
         navigationView?.isHidden = false
@@ -155,6 +157,10 @@ extension PushController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ReviewCell
+        
+        cell?.rightUtilityButtons = getRightButtons()
+        cell?.delegate = self
+        
         let object = reviews[indexPath.row]
         
         if let bookName = object["bookName"] as? String,
@@ -174,6 +180,91 @@ extension PushController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return cell!
+    }
+}
+
+extension PushController: SWTableViewCellDelegate {
+    func swipeableTableViewCell(_ cell: SWTableViewCell!, scrollingTo state: SWCellState) {
+        let indexPath = tableView?.indexPath(for: cell)
+        if state == .cellStateRight {
+            if swipingCellIndex != nil &&
+               swipingCellIndex?.row != indexPath?.row {
+                guard let swipingCellIndex = swipingCellIndex,
+                      let swipingCell = tableView?.cellForRow(at: swipingCellIndex) as? ReviewCell else { return }
+                swipingCell.hideUtilityButtons(animated: true)
+            }
+            swipingCellIndex = indexPath
+        } else if state == .cellStateCenter {
+            swipingCellIndex = nil
+        }
+    }
+    
+    func swipeableTableViewCell(_ cell: SWTableViewCell!, didTriggerRightUtilityButtonWith index: Int) {
+        cell.hideUtilityButtons(animated: true)
+        
+        guard let cellIndex = tableView?.indexPath(for: cell)?.row else { return }
+        let review = reviews[cellIndex]
+        
+        switch index {
+        case 0:
+            let controller = ReviewAdditionController()
+            GeneralFactory.addTitle("关闭", and: "发布", in: controller)
+            controller.isEditMode = true
+            controller.review = review
+            controller.editModeSetup()
+            
+            present(controller, animated: true)
+        case 1:
+            ProgressHUD.show("")
+            
+            let commentQuery = AVQuery(className: "Comment")
+            commentQuery.whereKey("review", equalTo: review)
+            commentQuery.findObjectsInBackground({ results, error in
+                if error == nil {
+                    guard let results = results as? [AVObject] else { return }
+                    for result in results {
+                        result.deleteInBackground()
+                    }
+                }
+            })
+            
+            let likeQuery = AVQuery(className: "Like")
+            likeQuery.whereKey("review", equalTo: review)
+            likeQuery.findObjectsInBackground({ results, error in
+                if error == nil {
+                    guard let results = results as? [AVObject] else { return }
+                    for result in results {
+                        result.deleteInBackground()
+                    }
+                }
+            })
+            
+            review.deleteInBackground({ result, error in
+                if result {
+                    ProgressHUD.showSuccess("删除成功")
+                    self.reviews.remove(at: cellIndex)
+                    self.tableView?.reloadData()
+                } else {
+                    ProgressHUD.showSuccess("删除失败")
+                }
+            })
+        default:
+            break
+        }
+    }
+}
+
+extension PushController {
+    func getRightButtons() -> [Any] {
+        let button1 = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 88.0, height: 88.0))
+        button1.backgroundColor = .orange
+        button1.setTitle("编辑", for: .normal)
+        
+        let button2 = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 88.0, height: 88.0))
+        button2.backgroundColor = .red
+        button2.setTitle("删除", for: .normal)
+        
+        return [button1, button2]
     }
 }
 

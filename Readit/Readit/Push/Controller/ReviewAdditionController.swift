@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVOSCloud
 import ProgressHUD
 
 class ReviewAdditionController: UIViewController {
@@ -25,6 +26,9 @@ class ReviewAdditionController: UIViewController {
     var reviewDetailType = "文学"
     
     var reviewContent = ""
+    
+    var isEditMode = false
+    var review: AVObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -346,6 +350,47 @@ extension ReviewAdditionController {
             "reviewContent": reviewContent
         ] as [String : Any]
         
-        BookReview.pushReviewBy(dict)
+        if isEditMode {
+            BookReview.pushReview(review, by: dict)
+        } else {
+            let object = AVObject(className: "BookReview")
+            BookReview.pushReview(object, by: dict)
+        }
+    }
+}
+
+extension ReviewAdditionController {
+    func editModeSetup() {
+        if isEditMode {
+            guard let review = review else { return }
+            headerView?.bookName?.text = review["bookName"] as? String
+            headerView?.bookEditor?.text = review["bookEditor"] as? String
+            
+            let coverFile = review["bookCover"] as? AVFile
+            coverFile?.getDataInBackground({ data, error in
+                if error == nil {
+                    guard let data = data else { return }
+                    self.headerView?.bookCover?.setImage(UIImage(data: data), for: .normal)
+                } else {
+                    ProgressHUD.showError("操作失败")
+                }
+            })
+            
+            guard let reviewTitle = review["reviewTitle"] as? String,
+                let reviewScore = review["reviewScore"] as? Int,
+                let reviewCurrentType = review["reviewCurrentType"] as? String,
+                let reviewDetailType = review["reviewDetailType"] as? String,
+                let reviewContent = review["reviewContent"] as? String else { return }
+            
+            self.reviewTitle = reviewTitle
+            self.reviewScore?.show_star = reviewScore
+            self.reviewCurrentType = reviewCurrentType
+            self.reviewDetailType = reviewDetailType
+            self.reviewContent = reviewContent
+            
+            if reviewContent != "" {
+                tableViewTitles.append("")
+            }
+        }
     }
 }

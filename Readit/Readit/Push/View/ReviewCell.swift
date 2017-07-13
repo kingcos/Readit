@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReviewCell: UITableViewCell {
+class ReviewCell: SWTableViewCell {
     
     var bookNameLabel: UILabel?
     var bookEditorLabel: UILabel?
