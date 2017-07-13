@@ -9,12 +9,16 @@
 import UIKit
 import AVOSCloud
 import MJRefresh
+import ProgressHUD
 
 class CommentAreaController: UIViewController {
 
     var tableView: UITableView?
     var comments = [AVObject]()
     var review: AVObject?
+    var commentInputView: InputView?
+    var maskView: UIView?
+    var keyboardHeight: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +38,13 @@ extension CommentAreaController {
     func setupUI() {
         view.backgroundColor = .white
         
+        setupTitleLabel()
+        setupTableView()
+        setupInputView()
+        setupMaskView()
+    }
+    
+    func setupTitleLabel() {
         let titleLabel = UILabel(frame: CGRect(x: 0.0,
                                                y: 20.0,
                                                width: SCREEN_WIDTH,
@@ -42,7 +53,9 @@ extension CommentAreaController {
         titleLabel.textAlignment = .center
         titleLabel.textColor = COLOR_MAIN_RED
         view.addSubview(titleLabel)
-        
+    }
+    
+    func setupTableView() {
         tableView = UITableView(frame: CGRect(x: 0.0,
                                               y: 64.0,
                                               width: SCREEN_WIDTH,
@@ -57,6 +70,83 @@ extension CommentAreaController {
         
         tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
         tableView.mj_footer = MJRefreshBackFooter(refreshingTarget: self, refreshingAction: #selector(footerRefresh))
+    }
+    
+    func setupInputView() {
+        commentInputView = Bundle.main.loadNibNamed("InputView", owner: self, options: nil)?.last as? InputView
+        commentInputView?.frame = CGRect(x: 0.0, y: SCREEN_HEIGHT - 44.0, width: SCREEN_WIDTH, height: 44.0)
+        commentInputView?.delegate = self
+        
+        guard let commentInputView = commentInputView else { return }
+        view.addSubview(commentInputView)
+    }
+    
+    func setupMaskView() {
+        maskView = UIView(frame: view.frame)
+        maskView?.backgroundColor = .gray
+        maskView?.alpha = 0
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(maskViewTapped))
+        maskView?.addGestureRecognizer(tap)
+        
+        guard let commentInputView = commentInputView,
+              let maskView = maskView else { return }
+        
+        view.insertSubview(maskView, belowSubview: commentInputView)
+    }
+}
+
+
+extension CommentAreaController: InputViewDelegate {
+    func textViewHeightDidChange(_ height: CGFloat) {
+        commentInputView?.height = height + 10.0
+        commentInputView?.bottom = SCREEN_HEIGHT - keyboardHeight
+    }
+    
+    func keyboardWillHide(_ inputView: InputView!, keyboardHeight: CGFloat, animationDuration duration: TimeInterval, animationCurve: UIViewAnimationCurve) {
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
+                       options: .beginFromCurrentState,
+                       animations: { 
+                        self.maskView?.alpha = 0
+                        self.commentInputView?.bottom = SCREEN_HEIGHT
+        }) { finish in
+            self.maskView?.isHidden = true
+        }
+    }
+    
+    func keyboardWillShow(_ inputView: InputView!, keyboardHeight: CGFloat, animationDuration duration: TimeInterval, animationCurve: UIViewAnimationCurve) {
+        self.keyboardHeight = keyboardHeight
+        maskView?.isHidden = false
+        
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
+                       options: .beginFromCurrentState,
+                       animations: { 
+                        self.maskView?.alpha = 0
+                        self.commentInputView?.bottom = SCREEN_HEIGHT - keyboardHeight
+        }, completion: nil)
+    }
+    
+    func publishButtonDidClick(_ button: UIButton!) {
+        ProgressHUD.show("")
+        
+        let comment = AVObject(className: "Comment")
+        comment.setObject(commentInputView?.inputTextView.text, forKey: "text")
+        comment.setObject(AVUser.current(), forKey: "user")
+        comment.setObject(review, forKey: "review")
+        comment.saveInBackground { result, error in
+            if result {
+                self.commentInputView?.inputTextView.text.removeAll()
+                self.commentInputView?.inputTextView.resignFirstResponder()
+                self.commentInputView?.resetInputView()
+                self.commentInputView?.bottom = SCREEN_HEIGHT
+                ProgressHUD.showSuccess("评论成功")
+                self.tableView?.mj_header.beginRefreshing()
+            } else {
+                ProgressHUD.showError("操作失败")
+            }
+        }
     }
 }
 
@@ -107,6 +197,10 @@ extension CommentAreaController {
             self.comments.append(contentsOf: results)
             self.tableView?.reloadData()
         }
+    }
+    
+    func maskViewTapped() {
+        
     }
 }
 
