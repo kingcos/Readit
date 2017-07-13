@@ -115,9 +115,7 @@ extension PushController {
                 self.reviews.removeAll()
                 
                 guard let objects = results as? [AVObject] else { return }
-                for object in objects {
-                    self.reviews.append(object)
-                }
+                self.reviews.append(contentsOf: objects)
                 self.tableView?.reloadData()
             } else {
                 ProgressHUD.showError("获取书评列表错误，请重试！")
@@ -140,9 +138,7 @@ extension PushController {
             
             if error == nil {
                 guard let objects = results as? [AVObject] else { return }
-                for object in objects {
-                    self.reviews.append(object)
-                }
+                self.reviews.append(contentsOf: objects)
                 
                 self.tableView?.reloadData()
             } else {

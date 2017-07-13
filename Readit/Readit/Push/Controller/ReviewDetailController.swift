@@ -134,7 +134,13 @@ extension ReviewDetailController: ReviewTabBarViewDelegate {
     }
     
     func commentAreaButtonClick() {
-        print(#function)
+        let controller = CommentAreaController()
+        GeneralFactory.addTitle("", and: "关闭", in: controller)
+        
+        controller.review = review
+        controller.tableView?.mj_header.beginRefreshing()
+        
+        present(controller, animated: true)
     }
     
     func likeButtonClick(_ sender: UIButton) {
@@ -245,7 +251,7 @@ extension ReviewDetailController: InputViewDelegate {
     func publishButtonDidClick(_ button: UIButton!) {
         ProgressHUD.show("")
         
-        let comment = AVObject(className: "discuss")
+        let comment = AVObject(className: "Comment")
         comment.setObject(commentInputView?.inputTextView.text, forKey: "text")
         comment.setObject(AVUser.current(), forKey: "user")
         comment.setObject(review, forKey: "review")
