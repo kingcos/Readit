@@ -69,6 +69,9 @@
 		8485C8C81F10C61100553143 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8485C8C71F10C61100553143 /* Assets.xcassets */; };
 		8485C8CB1F10C61100553143 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8485C8C91F10C61100553143 /* LaunchScreen.storyboard */; };
 		84F8D3961F1653230071826D /* ReviewTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8D3951F1653230071826D /* ReviewTabBarView.swift */; };
+		84F8D39D1F16969C0071826D /* InputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84F8D3981F16969C0071826D /* InputView.xib */; };
+		84F8D39E1F16969C0071826D /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F8D3991F16969C0071826D /* InputView.m */; };
+		84F8D39F1F16969C0071826D /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F8D39A1F16969C0071826D /* UIViewExt.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,6 +146,11 @@
 		8485C8CA1F10C61100553143 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8485C8CC1F10C61100553143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84F8D3951F1653230071826D /* ReviewTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTabBarView.swift; sourceTree = "<group>"; };
+		84F8D3981F16969C0071826D /* InputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputView.xib; sourceTree = "<group>"; };
+		84F8D3991F16969C0071826D /* InputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputView.m; sourceTree = "<group>"; };
+		84F8D39A1F16969C0071826D /* UIViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewExt.m; sourceTree = "<group>"; };
+		84F8D39B1F16969C0071826D /* InputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputView.h; sourceTree = "<group>"; };
+		84F8D39C1F16969C0071826D /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewExt.h; sourceTree = "<group>"; };
 		8A03959E024740032481BF91 /* Pods-Readit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Readit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Readit/Pods-Readit.debug.xcconfig"; sourceTree = "<group>"; };
 		AA43621039501E0FDBD42AF8 /* Pods_Readit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Readit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -297,6 +305,7 @@
 		8476E3421F10C7F10098700C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				84F8D3971F16969C0071826D /* InputView */,
 				84218E251F12742D000FF09B /* XKeyBoard */,
 				846AF92C1F12167C00800464 /* IGLDropDownMenu */,
 				846AF9071F1208C200800464 /* AKSegmentedControl */,
@@ -526,6 +535,18 @@
 			path = Readit;
 			sourceTree = "<group>";
 		};
+		84F8D3971F16969C0071826D /* InputView */ = {
+			isa = PBXGroup;
+			children = (
+				84F8D3981F16969C0071826D /* InputView.xib */,
+				84F8D3991F16969C0071826D /* InputView.m */,
+				84F8D39A1F16969C0071826D /* UIViewExt.m */,
+				84F8D39B1F16969C0071826D /* InputView.h */,
+				84F8D39C1F16969C0071826D /* UIViewExt.h */,
+			);
+			path = InputView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -610,6 +631,7 @@
 				846AF9201F1208C200800464 /* segmented-bg-pressed-right.png in Resources */,
 				846AF8E61F10F51E00800464 /* page4.png in Resources */,
 				846AF8E81F10F51E00800464 /* page3.png in Resources */,
+				84F8D39D1F16969C0071826D /* InputView.xib in Resources */,
 				846AF9281F1208C200800464 /* settings-icon@2x.png in Resources */,
 				8485C8C81F10C61100553143 /* Assets.xcassets in Resources */,
 				846AF8DD1F10F51E00800464 /* red_point.png in Resources */,
@@ -690,6 +712,7 @@
 				846AF8C31F10E48700800464 /* GeneralFactory.swift in Sources */,
 				846AF91B1F1208C200800464 /* AKSegmentedControl.m in Sources */,
 				8476E3631F10C9B90098700C /* SearchController.swift in Sources */,
+				84F8D39F1F16969C0071826D /* UIViewExt.m in Sources */,
 				84F8D3961F1653230071826D /* ReviewTabBarView.swift in Sources */,
 				84218E331F12A2D5000FF09B /* LoginController.swift in Sources */,
 				846AF9321F12167C00800464 /* IGLDropDownItem.m in Sources */,
@@ -707,6 +730,7 @@
 				846AF8FA1F11CCDB00800464 /* PushTitleController.swift in Sources */,
 				84218E381F13D792000FF09B /* ReviewCell.swift in Sources */,
 				846AF9311F12167C00800464 /* IGLDropDownMenu.m in Sources */,
+				84F8D39E1F16969C0071826D /* InputView.m in Sources */,
 				84218E3A1F14765C000FF09B /* ReviewDetailController.swift in Sources */,
 				8476E3611F10C9AC0098700C /* RankController.swift in Sources */,
 			);

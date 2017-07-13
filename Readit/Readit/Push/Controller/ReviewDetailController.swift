@@ -17,7 +17,10 @@ class ReviewDetailController: UIViewController {
     var reviewDetailView: ReviewDetailView?
     var reviewTabBarView: ReviewTabBarView?
     var reviewTextView: UITextView?
-
+    var commentInputView: InputView?
+    var maskView: UIView?
+    var keyboardHeight: CGFloat = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -102,7 +105,32 @@ extension ReviewDetailController {
 
 extension ReviewDetailController: ReviewTabBarViewDelegate {
     func writeCommentButtonClick() {
-        print(#function)
+        if commentInputView == nil {
+            commentInputView = Bundle.main.loadNibNamed("InputView", owner: self, options: nil)?.last as? InputView
+            commentInputView?.frame = CGRect(x: 0.0,
+                                             y: SCREEN_WIDTH - 44.0,
+                                             width: SCREEN_WIDTH,
+                                             height: 44.0)
+            commentInputView?.delegate = self
+            
+            guard let commentInputView = commentInputView else { return }
+            view.addSubview(commentInputView)
+        }
+        
+        if maskView == nil {
+            maskView = UIView(frame: view.frame)
+            maskView?.backgroundColor = .gray
+            maskView?.alpha = 0
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(maskViewTapped))
+            maskView?.addGestureRecognizer(tap)
+        }
+        
+        guard let maskView = maskView,
+              let commentInputView = commentInputView else { return }
+        view.insertSubview(maskView, belowSubview: commentInputView)
+        maskView.isHidden = false
+        commentInputView.inputTextView.becomeFirstResponder()
     }
     
     func commentAreaButtonClick() {
@@ -132,7 +160,7 @@ extension ReviewDetailController: ReviewTabBarViewDelegate {
                 for result in results {
                     result.deleteEventually()
                 }
-                sender.setImage(#imageLiteral(resourceName: "heart"), for: .normal)
+                sender.setImage(#imageLiteral(resourceName: "heart"), for: .normal) 
             } else {
                 let object = AVObject(className: "Like")
                 object.setObject(AVUser.current(), forKey: "user")
@@ -172,6 +200,60 @@ extension ReviewDetailController {
                     let button = self.reviewTabBarView?.viewWithTag(2002) as? UIButton
                     button?.setImage(#imageLiteral(resourceName: "solidheart"), for: .normal)
                 }
+            } else {
+                ProgressHUD.showError("操作失败")
+            }
+        }
+    }
+    
+    func maskViewTapped() {
+        commentInputView?.inputTextView.resignFirstResponder()
+    }
+}
+
+extension ReviewDetailController: InputViewDelegate {
+    func keyboardWillHide(_ inputView: InputView!, keyboardHeight: CGFloat, animationDuration duration: TimeInterval, animationCurve: UIViewAnimationCurve) {
+        UIView.animate(withDuration: duration,
+                       delay: 0.0,
+                       options: .beginFromCurrentState,
+                       animations: {
+                       guard let height = self.commentInputView?.height else { return }
+                       self.commentInputView?.bottom = SCREEN_HEIGHT + height
+                       self.maskView?.alpha = 0
+        }, completion: { finish in
+            self.maskView?.isHidden = true
+        })
+    }
+    
+    func keyboardWillShow(_ inputView: InputView!, keyboardHeight: CGFloat, animationDuration duration: TimeInterval, animationCurve: UIViewAnimationCurve) {
+        self.keyboardHeight = keyboardHeight
+        
+        UIView.animate(withDuration: duration,
+                       delay: 0,
+                       options: .beginFromCurrentState,
+                       animations: {
+                        self.commentInputView?.bottom = SCREEN_HEIGHT - keyboardHeight
+                        self.maskView?.alpha = 0.2
+        }, completion: nil)
+    }
+    
+    func textViewHeightDidChange(_ height: CGFloat) {
+        commentInputView?.height = height + 10.0
+        commentInputView?.bottom = SCREEN_HEIGHT - keyboardHeight
+    }
+    
+    func publishButtonDidClick(_ button: UIButton!) {
+        ProgressHUD.show("")
+        
+        let comment = AVObject(className: "discuss")
+        comment.setObject(commentInputView?.inputTextView.text, forKey: "text")
+        comment.setObject(AVUser.current(), forKey: "user")
+        comment.setObject(review, forKey: "review")
+        comment.saveInBackground { result, error in
+            if result {
+                self.commentInputView?.inputTextView.text.removeAll()
+                self.commentInputView?.inputTextView.resignFirstResponder()
+                ProgressHUD.showSuccess("评论成功")
             } else {
                 ProgressHUD.showError("操作失败")
             }
