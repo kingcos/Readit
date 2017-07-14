@@ -143,6 +143,9 @@ extension CommentAreaController: InputViewDelegate {
                 self.commentInputView?.bottom = SCREEN_HEIGHT
                 ProgressHUD.showSuccess("评论成功")
                 self.tableView?.mj_header.beginRefreshing()
+                
+                self.review?.incrementKey("commentNumber")
+                self.review?.saveInBackground()
             } else {
                 ProgressHUD.showError("操作失败")
             }

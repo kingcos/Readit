@@ -9,3 +9,4 @@
 #import "XKeyBoard.h"
 #import "InputView.h"
 #import "SWTableViewCell.h"
+#import "HZPhotoBrowser.h"

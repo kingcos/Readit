@@ -52,12 +52,18 @@ extension ReviewDetailController {
         guard let reviewDetailView = reviewDetailView else { return }
         view.addSubview(reviewDetailView)
         
+        review?.incrementKey("scanNumber")
+        review?.saveInBackground()
+        
         guard let bookCoverURL = (review?["bookCover"] as? AVFile)?.url,
         let bookName = review?["bookName"] as? String,
         let bookEditor = review?["bookEditor"] as? String,
         let user = review?["user"] as? AVUser,
         let date = review?["createdAt"] as? Date,
-        let reviewScore = review?["reviewScore"] as? Int else { return }
+        let reviewScore = review?["reviewScore"] as? Int,
+        let scanNumber = review?["scanNumber"] as? NSNumber,
+        let likeNumber = review?["likeNumber"] as? NSNumber,
+        let commentNumber = review?["commentNumber"] as? NSNumber else { return }
         
         reviewDetailView.coverImageView?.kf.setImage(with: URL(string: bookCoverURL))
         reviewDetailView.bookNameLabel?.text = "《\(bookName)》"
@@ -73,7 +79,11 @@ extension ReviewDetailController {
         reviewDetailView.dateLabel?.text = format.string(from: date)
         
         reviewDetailView.reviewScore?.show_star = reviewScore
-        reviewDetailView.moreLabel?.text = "喜欢:100 评论:199 浏览:19999"
+        reviewDetailView.moreLabel?.text = "喜欢:\(likeNumber.intValue) 评论:\(commentNumber.intValue) 浏览:\(scanNumber.intValue)"
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(selectPhotoBrowser))
+        reviewDetailView.coverImageView?.addGestureRecognizer(tap)
+        reviewDetailView.coverImageView?.isUserInteractionEnabled = true
     }
     
     func setupTabBarView() {
@@ -166,7 +176,9 @@ extension ReviewDetailController: ReviewTabBarViewDelegate {
                 for result in results {
                     result.deleteEventually()
                 }
-                sender.setImage(#imageLiteral(resourceName: "heart"), for: .normal) 
+                sender.setImage(#imageLiteral(resourceName: "heart"), for: .normal)
+                review.incrementKey("likeNumber", byAmount: NSNumber(value: -1))
+                review.saveInBackground()
             } else {
                 let object = AVObject(className: "Like")
                 object.setObject(AVUser.current(), forKey: "user")
@@ -175,6 +187,9 @@ extension ReviewDetailController: ReviewTabBarViewDelegate {
                 object.saveInBackground({ result, error in
                     if result {
                         sender.setImage(#imageLiteral(resourceName: "solidheart"), for: .normal)
+                        
+                        review.incrementKey("likeNumber")
+                        review.saveInBackground()
                     } else {
                         ProgressHUD.showError("操作失败")
                     }
@@ -214,6 +229,25 @@ extension ReviewDetailController {
     
     func maskViewTapped() {
         commentInputView?.inputTextView.resignFirstResponder()
+    }
+    
+    func selectPhotoBrowser() {
+        let photoBrowser = HZPhotoBrowser()
+        photoBrowser.imageCount = 1
+        photoBrowser.currentImageIndex = 0
+        photoBrowser.delegate = self
+        photoBrowser.show()
+    }
+}
+
+extension ReviewDetailController: HZPhotoBrowserDelegate {
+    func photoBrowser(_ browser: HZPhotoBrowser!, placeholderImageFor index: Int) -> UIImage! {
+        return reviewDetailView?.coverImageView?.image
+    }
+    
+    func photoBrowser(_ browser: HZPhotoBrowser!, highQualityImageURLFor index: Int) -> URL! {
+        let coverFile = review?["bookCover"] as? AVFile
+        return URL(string: (coverFile?.url)!)
     }
 }
 
@@ -260,6 +294,9 @@ extension ReviewDetailController: InputViewDelegate {
                 self.commentInputView?.inputTextView.text.removeAll()
                 self.commentInputView?.inputTextView.resignFirstResponder()
                 ProgressHUD.showSuccess("评论成功")
+                
+                self.review?.incrementKey("commentNumber")
+                self.review?.saveInBackground()
             } else {
                 ProgressHUD.showError("操作失败")
             }
