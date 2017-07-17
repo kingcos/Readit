@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LeanCloud
+import AVOSCloud
 import ProgressHUD
 
 class RegisterController: UIViewController {
@@ -59,20 +59,20 @@ extension RegisterController {
               let password = passwordTextField.text,
               let email = emailTextField.text else { return }
         
-        let user = LCUser() 
+        let user = AVUser()
         
-        user.username = LCString(userName)
-        user.password = LCString(password)
-        user.email = LCString(email)
+        user.username = userName
+        user.password = password
+        user.email = email
         
-        user.signUp { result in
-            if result.isSuccess {
+        user.signUpInBackground { result, error in
+            if result {
                 ProgressHUD.showSuccess("注册成功，请验证邮箱！")
                 self.dismiss(animated: true)
             } else {
                 var errorDesc = "注册失败，未知错误。"
                 
-                if let code = result.error?.code {
+                if let code = (error as NSError?)?.code {
                     switch code {
                     case 125:
                         errorDesc = "邮箱不合法！"

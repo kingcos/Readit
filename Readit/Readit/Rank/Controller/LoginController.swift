@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import LeanCloud
+import AVOSCloud
 import ProgressHUD
 
 class LoginController: UIViewController {
@@ -57,13 +57,13 @@ extension LoginController {
         guard let userName = userNameTextField.text,
             let password = passwordTextField.text else { return }
         
-        LCUser.logIn(username: userName, password: password) { result in
-            if result.isSuccess {
+        AVUser.logInWithUsername(inBackground: userName, password: password) { result, error in
+            if error == nil {
                 self.dismiss(animated: true)
             } else {
                 var errorDesc = "登录失败，未知错误。"
                 
-                if let code = result.error?.code {
+                if let code = (error as NSError?)?.code {
                     switch code {
                     case 210:
                         errorDesc = "用户名或密码错误！"
@@ -81,6 +81,5 @@ extension LoginController {
                 ProgressHUD.showError(errorDesc)
             }
         }
-        
     }
 }

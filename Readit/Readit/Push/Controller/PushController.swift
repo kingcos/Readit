@@ -8,20 +8,32 @@
 
 import UIKit
 import MJRefresh
-import LeanCloud
+import AVOSCloud
+import Kingfisher
 import ProgressHUD
 
 class PushController: UIViewController {
     
     let cellIdentifier = "PushCell"
     
-    var reviews = [LCObject]()
+    var reviews = [AVObject]()
+    var navigationView: UIView?
     var tableView: UITableView?
+    
+    var swipingCellIndex: IndexPath?
 
+    override func viewDidAppear(_ animated: Bool) {
+        navigationView?.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationView?.isHidden = true
     }
     
     deinit {
@@ -39,9 +51,10 @@ extension PushController {
     }
     
     func setupNavigationBar() {
-        let navigationView = UIView(frame: CGRect(x: 0.0, y: -20.0, width: SCREEN_WIDTH, height: 65))
-        navigationView.backgroundColor = .white
+        navigationView = UIView(frame: CGRect(x: 0.0, y: -20.0, width: SCREEN_WIDTH, height: 65))
+        navigationView?.backgroundColor = .white
         
+        guard let navigationView = navigationView else { return }
         navigationController?.navigationBar.addSubview(navigationView)
         
         let addBookButton = UIButton(frame: CGRect(x: 20.0, y: 20.0, width: SCREEN_WIDTH, height: 45.0))
@@ -78,28 +91,33 @@ extension PushController {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let controller = ReviewDetailController()
+        controller.review = reviews[indexPath.row]
+        controller.hidesBottomBarWhenPushed = true
+        
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 
 extension PushController {
     func tableViewHeadeRefresh() {
-        let query = LCQuery(className: "BookReview")
+        let query = AVQuery(className: "BookReview")
         
         query.limit = 20
-        query.whereKey("createdAt", .descending)
+        query.order(byDescending: "createdAt")
+
+        guard let user = AVUser.current() else { return }
+        query.whereKey("user", equalTo: user)
         
-        guard let user = LCUser.current else { return }
-        query.whereKey("user", .equalTo(user))
-        
-        query.find { result in
-            if result.isSuccess {
-                self.tableView?.mj_header.endRefreshing()
+        query.findObjectsInBackground { results, error in
+            self.tableView?.mj_header.endRefreshing()
+            
+            if error == nil {
                 self.reviews.removeAll()
                 
-                guard let objects = result.objects else { return }
-                for object in objects {
-                    self.reviews.append(object)
-                }
+                guard let objects = results as? [AVObject] else { return }
+                self.reviews.append(contentsOf: objects)
                 self.tableView?.reloadData()
             } else {
                 ProgressHUD.showError("获取书评列表错误，请重试！")
@@ -108,23 +126,21 @@ extension PushController {
     }
     
     func tableViewFooterRefresh() {
-        let query = LCQuery(className: "BookReview")
+        let query = AVQuery(className: "BookReview")
         
         query.limit = 20
         query.skip = reviews.count
-        query.whereKey("createdAt", .descending)
+        query.order(byDescending: "createdAt")
         
-        guard let user = LCUser.current else { return }
-        query.whereKey("user", .equalTo(user))
+        guard let user = AVUser.current() else { return }
+        query.whereKey("user", equalTo: user)
         
-        query.find { result in
-            if result.isSuccess {
-                self.tableView?.mj_footer.endRefreshing()
-                
-                guard let objects = result.objects else { return }
-                for object in objects {
-                    self.reviews.append(object)
-                }
+        query.findObjectsInBackground { results, error in
+            self.tableView?.mj_footer.endRefreshing()
+            
+            if error == nil {
+                guard let objects = results as? [AVObject] else { return }
+                self.reviews.append(contentsOf: objects)
                 
                 self.tableView?.reloadData()
             } else {
@@ -141,23 +157,114 @@ extension PushController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ReviewCell
+        
+        cell?.rightUtilityButtons = getRightButtons()
+        cell?.delegate = self
+        
         let object = reviews[indexPath.row]
         
-        if let bookName = object["bookName"]?.stringValue,
-           let bookEditor = object["bookEditor"]?.stringValue,
-           let date = object["createdAt"]?.dateValue,
-           let bookCover = object["bookCover"]?.dataValue {
+        if let bookName = object["bookName"] as? String,
+           let bookEditor = object["bookEditor"] as? String,
+           let date = object["createdAt"] as? Date,
+           let bookCoverURL = (object["bookCover"] as? AVFile)?.url {
+            
             cell?.bookNameLabel?.text = "《\(bookName)》"
             cell?.bookEditorLabel?.text = "作者：\(bookEditor)"
-            cell?.coverImageView?.image = UIImage(data: bookCover)
             
             let format = DateFormatter()
             
             format.dateFormat = "yyyy-MM-dd hh:mm"
             cell?.moreLabel?.text = format.string(from: date)
+            
+            cell?.coverImageView?.kf.setImage(with: URL(string: bookCoverURL), placeholder: #imageLiteral(resourceName: "Cover.png"))
         }
         
         return cell!
+    }
+}
+
+extension PushController: SWTableViewCellDelegate {
+    func swipeableTableViewCell(_ cell: SWTableViewCell!, scrollingTo state: SWCellState) {
+        let indexPath = tableView?.indexPath(for: cell)
+        if state == .cellStateRight {
+            if swipingCellIndex != nil &&
+               swipingCellIndex?.row != indexPath?.row {
+                guard let swipingCellIndex = swipingCellIndex,
+                      let swipingCell = tableView?.cellForRow(at: swipingCellIndex) as? ReviewCell else { return }
+                swipingCell.hideUtilityButtons(animated: true)
+            }
+            swipingCellIndex = indexPath
+        } else if state == .cellStateCenter {
+            swipingCellIndex = nil
+        }
+    }
+    
+    func swipeableTableViewCell(_ cell: SWTableViewCell!, didTriggerRightUtilityButtonWith index: Int) {
+        cell.hideUtilityButtons(animated: true)
+        
+        guard let cellIndex = tableView?.indexPath(for: cell)?.row else { return }
+        let review = reviews[cellIndex]
+        
+        switch index {
+        case 0:
+            let controller = ReviewAdditionController()
+            GeneralFactory.addTitle("关闭", and: "发布", in: controller)
+            controller.isEditMode = true
+            controller.review = review
+            controller.editModeSetup()
+            
+            present(controller, animated: true)
+        case 1:
+            ProgressHUD.show("")
+            
+            let commentQuery = AVQuery(className: "Comment")
+            commentQuery.whereKey("review", equalTo: review)
+            commentQuery.findObjectsInBackground({ results, error in
+                if error == nil {
+                    guard let results = results as? [AVObject] else { return }
+                    for result in results {
+                        result.deleteInBackground()
+                    }
+                }
+            })
+            
+            let likeQuery = AVQuery(className: "Like")
+            likeQuery.whereKey("review", equalTo: review)
+            likeQuery.findObjectsInBackground({ results, error in
+                if error == nil {
+                    guard let results = results as? [AVObject] else { return }
+                    for result in results {
+                        result.deleteInBackground()
+                    }
+                }
+            })
+            
+            review.deleteInBackground({ result, error in
+                if result {
+                    ProgressHUD.showSuccess("删除成功")
+                    self.reviews.remove(at: cellIndex)
+                    self.tableView?.reloadData()
+                } else {
+                    ProgressHUD.showSuccess("删除失败")
+                }
+            })
+        default:
+            break
+        }
+    }
+}
+
+extension PushController {
+    func getRightButtons() -> [Any] {
+        let button1 = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 88.0, height: 88.0))
+        button1.backgroundColor = .orange
+        button1.setTitle("编辑", for: .normal)
+        
+        let button2 = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 88.0, height: 88.0))
+        button2.backgroundColor = .red
+        button2.setTitle("删除", for: .normal)
+        
+        return [button1, button2]
     }
 }
 
