@@ -31,6 +31,24 @@ class CommentAreaController: UIViewController {
         
         let button = view.viewWithTag(1000)
         button?.removeFromSuperview()
+        
+        guard let commentInputView = commentInputView else { return }
+        NotificationCenter.default.removeObserver(commentInputView,
+                                                  name: NSNotification.Name.UIKeyboardWillShow,
+                                                  object: nil)
+        NotificationCenter.default.addObserver(commentInputView,
+                                               selector: #selector(KeyBoardDlegate.keyboardWillShow(_:)),
+                                               name: NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        viewDidDisappear(animated)
+        
+        guard let commentInputView = commentInputView else { return }
+        NotificationCenter.default.removeObserver(commentInputView,
+                                                  name: NSNotification.Name.UIKeyboardWillShow,
+                                                    object: nil)
     }
 }
 

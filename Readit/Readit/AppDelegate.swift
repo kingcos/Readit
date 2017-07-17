@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         setupLeanCloud()
+        setupShareSDK()
         setupWindow()
         
         return true
@@ -61,5 +62,31 @@ extension AppDelegate {
     
     func setupLeanCloud() {
         AVOSCloud.setApplicationId("M4A5qpg7aploMttI5R1dYock-gzGzoHsz", clientKey: "1NovDStWvroPtwx4h1GqSLul")
+    }
+    
+    func setupShareSDK() {
+        ShareSDK.registerApp("1f6fb1f9408a0",
+                             activePlatforms: [SSDKPlatformType.typeSinaWeibo.rawValue,
+                                               SSDKPlatformType.typeTencentWeibo.rawValue],
+                             onImport: { type in
+                                switch type {
+                                case .typeWechat:
+                                    ShareSDKConnector.connectWeChat(WXApi.classForCoder())
+                                case .typeQQ:
+                                    ShareSDKConnector.connectQQ(QQApiCommonContentObject.classForCoder(),
+                                                                tencentOAuthClass: TencentOAuth.classForCoder())
+                                default:
+                                    break
+                                }
+        }) { type, dict in
+            switch type {
+            case .typeWechat:
+                dict?.ssdkSetupWeChat(byAppId: "KEY", appSecret: "KEY")
+            case .typeQQ:
+                dict?.ssdkSetupQQ(byAppId: "KEY", appKey: "KEY", authType: SSDKAuthTypeBoth)
+            default:
+                break
+            }
+        }
     }
 }

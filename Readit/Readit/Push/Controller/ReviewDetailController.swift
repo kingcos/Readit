@@ -27,6 +27,9 @@ class ReviewDetailController: UIViewController {
         setupUI()
     }
 
+    deinit {
+        print("ReviewDetailController", #function)
+    }
 }
 
 extension ReviewDetailController {
@@ -201,7 +204,20 @@ extension ReviewDetailController: ReviewTabBarViewDelegate {
     }
     
     func shareButtonClick() {
-        print(#function)
+        let shareParams = NSMutableDictionary()
+        shareParams.ssdkSetupShareParams(byText: "分享内容", images: reviewDetailView?.coverImageView?.image, url: URL(string: "maimieng.com"), title: "", type: .image)
+        ShareSDK.showShareActionSheet(view, items: nil, shareParams: shareParams) { state, type, data, entity, error, success in
+            switch state {
+            case .success:
+                ProgressHUD.showSuccess("分享成功")
+            case .fail:
+                ProgressHUD.showError("分享失败")
+            case .cancel:
+                ProgressHUD.showError("取消分享")
+            default:
+                break
+            }
+        }
     }
 }
 
